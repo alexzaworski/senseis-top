@@ -1,0 +1,32 @@
+.button {
+  display: inline-block;
+  border: 0;
+  border-radius: 4px;
+  color: rgba(#fff, 0.85);
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 8px 12px;
+  background: linear-gradient($lightBlue, $darkBlue);
+  outline: none;
+  touch-action: manipulation;
+  &:focus:not(:active) {
+    box-shadow: 0 0 0 2px darken($darkPurple, 15%);
+  }
+  &--secondary {
+    background: linear-gradient(rgba(white, 0.2), rgba(white, 0.05));
+  }
+  &--danger {
+    background: linear-gradient($red 0%, $magenta 100%);
+  }
+}
+
+.button-group {
+  text-align: right;
+  margin-top: 24px;
+  .button:not(:last-child) {
+    margin-right: 16px;
+  }
+}

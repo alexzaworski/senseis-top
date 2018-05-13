@@ -1,0 +1,36 @@
+.text-input-wrap {
+  margin-bottom: 16px;
+}
+
+.text-input-label {
+  font-size: 0.75rem;
+  display: block;
+  color: rgba(#fff, 0.75);
+  margin-bottom: 8px;
+}
+
+.text-input {
+  display: block;
+  background: none;
+  border: 2px solid rgba(#fff, 0.15);
+  width: 100%;
+  font-size: 1rem;
+  border-radius: 4px;
+  padding: 8px;
+  color: #fff;
+  -webkit-appearance: none;
+  &--error {
+    border-color: $red;
+  }
+
+  &:focus {
+    border-color: $lightBlue;
+    outline: none;
+  }
+}
+
+.text-input-error {
+  color: $red;
+  font-size: 0.75em;
+  margin-top: 4px;
+}

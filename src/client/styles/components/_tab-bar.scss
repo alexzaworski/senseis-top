@@ -1,0 +1,19 @@
+.tab-bar {
+  height: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(rgba(#fff, 0.05), rgba(#fff, 0.01));
+}
+
+.tab-bar__item {
+  height: 32px;
+  margin: 0 8px;
+}
+
+.tab-bar__item-icon {
+  fill: rgba(#fff, 0.25);
+  .tab-bar__item--active & {
+    fill: $lightBlue;
+  }
+}

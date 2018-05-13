@@ -1,0 +1,29 @@
+.header {
+  padding: 40px 16px 20px;
+  background: linear-gradient(rgba(#fff, 0.1), rgba(#fff, 0.05));
+  margin-bottom: 8px;
+}
+
+.header__title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-right: 8px;
+  white-space: nowrap;
+  flex-grow: 1;
+}
+
+.header__icon {
+  fill: rgba(#fff, 0.25);
+  height: 24px;
+  width: 24px;
+  margin: auto 8px auto 0;
+  flex-shrink: 0;
+}
+
+.header__title-wrap {
+  display: flex;
+  justify-content: space-between;
+  .button {
+    margin: auto 0;
+  }
+}

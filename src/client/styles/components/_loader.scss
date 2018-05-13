@@ -1,0 +1,45 @@
+/* https://github.com/tobiasahlin/SpinKit */
+
+$loaderDelay: 0.5;
+
+.loader {
+  width: 48px;
+  height: 48px;
+  opacity: 0;
+  animation: loader 0s forwards;
+  animation-delay: #{$loaderDelay}s;
+}
+
+@keyframes loader {
+  100% {
+    opacity: 1;
+  }
+}
+
+.loader__cube {
+  float: left;
+  width: calc(100% / 3);
+  height: calc(100% / 3);
+  background: $lightPurple;
+  will-change: transform;
+  animation: cube 1.5s infinite cubic-bezier(0.4, 0, 0.2, 1);
+  @for $i from 1 through 9 {
+    $row: ceil($i / 3);
+    $col: ($i - 1) % 3 + 1;
+    $val: $row + $col - (2 * ($row - 1));
+    &:nth-of-type(#{$i}) {
+      animation-delay: #{$val / 10 + $loaderDelay}s;
+    }
+  }
+}
+
+@keyframes cube {
+  0%,
+  70%,
+  100% {
+    transform: scale(1);
+  }
+  35% {
+    transform: scale(0);
+  }
+}
