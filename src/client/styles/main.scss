@@ -77,6 +77,8 @@ a {
 .view-main {
   flex-grow: 1;
   padding: 16px;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
   &--centered {
     display: flex;
     justify-content: center;
