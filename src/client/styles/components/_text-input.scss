@@ -3,7 +3,7 @@
 }
 
 .text-input-label {
-  color: rgba(#fff, 0.75);
+  color: rgba($white, 0.75);
   display: block;
   font-size: 0.75rem;
   margin-bottom: 8px;
@@ -12,9 +12,9 @@
 .text-input {
   appearance: none;
   background: none;
-  border: 2px solid rgba(#fff, 0.15);
+  border: 2px solid rgba($white, 0.15);
   border-radius: 4px;
-  color: #fff;
+  color: $white;
   display: block;
   font-size: 1rem;
   padding: 8px;

@@ -1,7 +1,7 @@
 .tab-bar {
   $elem: &;
   align-items: center;
-  background: linear-gradient(rgba(#fff, 0.05), rgba(#fff, 0.01));
+  background: linear-gradient(rgba($white, 0.05), rgba($white, 0.01));
   display: flex;
   flex-shrink: 0;
   height: 48px;
@@ -13,7 +13,7 @@
   }
 
   &__item-icon {
-    fill: rgba(#fff, 0.25);
+    fill: rgba($white, 0.25);
 
     #{$elem}__item--active & {
       fill: $light-blue;

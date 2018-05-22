@@ -17,8 +17,8 @@
   "license": "MIT",
   "author": "Alex Zaworski",
   "lint-staged": {
-    "*.scss": [
-      "yarn stylelint",
+    "src/client/styles/**/*.scss": [
+      "stylelint --fix --syntax scss",
       "git add"
     ]
   },
