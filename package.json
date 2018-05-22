@@ -3,18 +3,22 @@
     "start": "nf start",
     "clean": "rm -rf ./dist && mkdir ./dist",
     "build": "yarn run clean && yarn run build-server && yarn run build-client",
-    "stylelint": "stylelint \"src/client/styles/**/*.scss\" --syntax scss",
+    "stylelint": "stylelint \"src/client/styles/**/*.scss\" --syntax scss --fix",
     "start-server": "nodemon --watch ./src/server --watch ./src/shared --exec \" node src/server/\"",
     "start-client": "webpack-dev-server --host 0.0.0.0 --hot --config webpack.dev.js",
     "build-server": "yarn run babel-server && yarn run babel-shared",
     "build-client": "BABEL_ENV=production webpack -p --config webpack.prod.js && rsync -r ./static/ ./dist/static/",
     "babel-server": "BABEL_ENV=production babel ./src/server --out-dir ./dist/server",
-    "babel-shared": "BABEL_ENV=production babel ./src/shared --out-dir ./dist/shared"
+    "babel-shared": "BABEL_ENV=production babel ./src/shared --out-dir ./dist/shared",
+    "precommit": "lint-staged"
   },
   "name": "senseis-top",
   "version": "0.0.1",
   "license": "MIT",
   "author": "Alex Zaworski",
+  "lint-staged": {
+    "*.scss": ["yarn stylelint", "git add"]
+  },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
@@ -31,6 +35,7 @@
     "extract-text-webpack-plugin": "^3.0.1",
     "foreman": "^2.0.0",
     "html-webpack-plugin": "^2.30.1",
+    "lint-staged": "^7.1.2",
     "node-sass": "^4.5.3",
     "nodemon": "^1.17.2",
     "redux-devtools-extension": "^2.13.2",
