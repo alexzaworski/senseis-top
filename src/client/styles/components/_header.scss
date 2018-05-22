@@ -1,50 +1,52 @@
 .header {
+  background: rgba($white, 0.075);
   padding: 40px 16px 20px;
-  background: rgba(#fff, .075);
+
   &--collapsed {
+    align-items: flex-end;
     display: flex;
     flex-direction: row;
-    align-items: flex-end;
     padding: 12px 4px;
   }
 }
 
 .header__title {
+  flex-grow: 1;
+  margin-right: 8px;
   overflow: hidden;
   text-overflow: ellipsis;
-  margin-right: 8px;
   white-space: nowrap;
-  flex-grow: 1;
 }
 
 .header__icon {
-  fill: rgba(#fff, 0.25);
-  height: 24px;
-  width: 24px;
-  margin: auto 8px auto 0;
+  fill: rgba($white, 0.25);
   flex-shrink: 0;
+  height: 24px;
+  margin: auto 8px auto 0;
+  width: 24px;
 }
 
 .header__title-wrap {
-  width: 100%;
   display: flex;
   justify-content: space-between;
+  width: 100%;
+
   .button {
     margin: auto 0;
   }
 }
 
 .header__back-link {
-  color: $lightBlue;
-  display: inline-flex;
   align-items: center;
-  font-weight: bold;
+  color: $light-blue;
+  display: inline-flex;
   font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 0.02em;
   text-transform: uppercase;
-  letter-spacing: .02em;
 }
 
 .header__back-link__icon {
-  fill: $lightBlue;
+  fill: $light-blue;
   margin-right: 2px;
 }
