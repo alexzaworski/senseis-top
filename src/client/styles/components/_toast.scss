@@ -3,51 +3,59 @@
 }
 
 .toast {
-  position: absolute;
-  background: darken($darkPurple, 7.5%);
-  border-radius: 4px;
-  bottom: 8px;
-  left: 8px;
-  right: 8px;
-  height: 48px;
-  display: flex;
+  $elem: &;
   align-items: center;
   animation: toast-out 0.15s cubic-bezier(0.4, 0, 1, 1) forwards;
+  background: darken($dark-purple, 7.5%);
+  border-radius: 4px;
+  bottom: 8px;
+  display: flex;
+  height: 48px;
+  left: 8px;
+  position: absolute;
+  right: 8px;
+
+  &__icon {
+    flex-shrink: 0;
+    height: 24px;
+    margin: auto 12px;
+    width: 24px;
+  }
+
+  &__message {
+    display: inline-block;
+    margin: auto 12px auto 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &--error {
+    #{$elem}__icon {
+      fill: $red;
+    }
+  }
+
+  &--success {
+    #{$elem}__icon {
+      fill: $green;
+    }
+  }
+
   &--active {
     animation: toast-in 0.125s cubic-bezier(0, 0, 0.2, 1) forwards;
   }
 }
 
-.toast__icon {
-  margin: auto 12px;
-  flex-shrink: 0;
-  height: 24px;
-  width: 24px;
-  .toast--error & {
-    fill: $red;
-  }
-  .toast--success & {
-    fill: $green;
-  }
-}
-
-.toast__message {
-  display: inline-block;
-  margin: auto 12px auto 0;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
 @mixin inactive-toast {
+  opacity: 0;
   transform: translateY(30%);
   transform-origin: 50% 100%;
-  opacity: 0;
 }
 
 @mixin active-toast {
-  transform: translateY(0);
   opacity: 1;
+  transform: translateY(0);
 }
 
 @keyframes toast-in {

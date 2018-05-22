@@ -1,6 +1,7 @@
 const path = require('path');
 const Dotenv = require('dotenv-webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const styleLintPlugin = require('stylelint-webpack-plugin');
 
 module.exports = {
   entry: {
@@ -30,5 +31,13 @@ module.exports = {
       template: './src/client/template.ejs',
     }),
     new Dotenv(),
+    new styleLintPlugin({
+      configFile: '.stylelintrc',
+      context: 'src/client/styles',
+      files: '**/*.scss',
+      failOnError: false,
+      quiet: false,
+      syntax: 'scss',
+    }),
   ],
 };

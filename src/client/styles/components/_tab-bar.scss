@@ -1,20 +1,22 @@
 .tab-bar {
-  flex-shrink: 0;
-  height: 48px;
-  display: flex;
-  justify-content: center;
+  $elem: &;
   align-items: center;
   background: linear-gradient(rgba(#fff, 0.05), rgba(#fff, 0.01));
-}
+  display: flex;
+  flex-shrink: 0;
+  height: 48px;
+  justify-content: center;
 
-.tab-bar__item {
-  height: 32px;
-  margin: 0 8px;
-}
+  &__item {
+    height: 32px;
+    margin: 0 8px;
+  }
 
-.tab-bar__item-icon {
-  fill: rgba(#fff, 0.25);
-  .tab-bar__item--active & {
-    fill: $lightBlue;
+  &__item-icon {
+    fill: rgba(#fff, 0.25);
+
+    #{$elem}__item--active & {
+      fill: $light-blue;
+    }
   }
 }
