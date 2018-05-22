@@ -7,13 +7,19 @@ import wsSend from '../ws-send';
 
 import broadcastRooms from './shared/broadcast-rooms';
 import exitRoom from './shared/exit-room';
+import leaveRoomHandler from './leave-room';
 
 const joinRoomHandler = ({ws, data}) => {
   const {password, roomId, userId, life} = data;
   const room = getRoom({password, roomId, userId});
-
+  const idleCallback = () => leaveRoomHandler({ws, data});
   if (room) {
-    room.addUser({userId, life, ws});
+    room.addUser({
+      userId,
+      life,
+      ws,
+      idleCallback,
+    });
     room.usersExcept(userId).forEach(user => {
       wsSend(user.ws, {
         type: UPDATE_USERS,
@@ -21,7 +27,7 @@ const joinRoomHandler = ({ws, data}) => {
       });
     });
   } else {
-    createRoom({roomId, password, userId, life, ws});
+    createRoom({roomId, password, userId, life, ws, idleCallback});
   }
 
   wsSend(ws, {
