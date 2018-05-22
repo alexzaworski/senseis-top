@@ -28,9 +28,9 @@ $bar-colors: (
     text-transform: uppercase;
     white-space: nowrap;
 
-    @for $i from 1 through length($barColors) {
+    @for $i from 1 through length($bar-colors) {
       #{$elem}__user:nth-of-type(#{$i}n) & {
-        border-color: nth($barColors, $i);
+        border-color: nth($bar-colors, $i);
       }
     }
   }
