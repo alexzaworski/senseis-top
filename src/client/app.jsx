@@ -14,6 +14,7 @@ import {
   LIST_ROOMS_REQUEST,
   JOIN_ROOM_REQUEST,
   WS_ERROR,
+  CONNECTION_OPENED,
 } from '../shared/action-types';
 
 import {CONNECTION_LOST} from '../shared/error-codes';
@@ -42,6 +43,8 @@ class App extends React.PureComponent {
     self: PropTypes.object,
     storedRoom: PropTypes.object,
     connectionLost: PropTypes.func,
+    connectionOpened: PropTypes.func,
+    socketConnected: PropTypes.bool,
   };
 
   static childContextTypes = {
@@ -69,15 +72,25 @@ class App extends React.PureComponent {
   };
 
   connect = () => {
-    const {activeRoom, self, storedRoom, connectionLost} = this.props;
+    const {
+      activeRoom,
+      self,
+      storedRoom,
+      connectionLost,
+      connectionOpened,
+      socketConnected,
+    } = this.props;
     const socket = new WebSocket(wsHost);
-    socket.onclose = () =>
-      setTimeout(() => {
-        this.connect(true);
-        connectionLost();
-      }, retryTimeout);
     socket.onmessage = m => this.handleMessage(JSON.parse(m.data));
+    socket.onclose = () => {
+      // check to make sure the socket was previously open before
+      // dispatching a "connection lost" message, otherwise
+      // repeated failed connections will spam an error message.
+      socketConnected && connectionLost();
+      setTimeout(this.connect, retryTimeout);
+    };
     socket.onopen = () => {
+      !socketConnected && connectionOpened();
       this.socket = socket;
       this.wsSend({type: LIST_ROOMS_REQUEST});
       const roomToJoin = activeRoom || storedRoom;
@@ -127,13 +140,21 @@ class App extends React.PureComponent {
 }
 
 const mapStateToProps = state => {
-  const {rooms, activeRoom, attemptedRoom, self, storedRoom} = state;
+  const {
+    rooms,
+    activeRoom,
+    attemptedRoom,
+    self,
+    storedRoom,
+    socketConnected,
+  } = state;
   return {
     rooms,
     activeRoom,
     attemptedRoom,
     self,
     storedRoom,
+    socketConnected,
   };
 };
 
@@ -144,6 +165,9 @@ const mapDispatchToProps = dispatch => {
     },
     connectionLost: () => {
       dispatch({type: WS_ERROR, error: CONNECTION_LOST});
+    },
+    connectionOpened: () => {
+      dispatch({type: CONNECTION_OPENED});
     },
   };
 };

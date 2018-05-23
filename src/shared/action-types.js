@@ -14,9 +14,8 @@ export const INCREMENT_LIFE = 'INCREMENT_LIFE';
 export const DECREMENT_LIFE = 'DECREMENT_LIFE';
 
 export const SET_LIFE_REQUEST = 'SET_LIFE_REQUEST';
-
 export const WS_ERROR = 'WS_ERROR';
 export const UPDATE_USERS = 'UPDATE_USERS';
-
 export const CLEAR_ERROR = 'CLEAR_ERROR';
 export const CLEAR_TOAST = 'CLEAR_TOAST';
+export const CONNECTION_OPENED = 'CONNECTION_OPENED';
