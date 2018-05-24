@@ -53,7 +53,7 @@ class App extends React.PureComponent {
 
   componentDidMount() {
     const noSleep = new NoSleep();
-    document.addEventListener('touchstart', () => noSleep.enable(), {
+    document.addEventListener('touchend', () => noSleep.enable(), {
       once: true,
     });
     this.connect();
