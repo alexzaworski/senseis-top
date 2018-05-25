@@ -33,10 +33,14 @@ export const createRoom = ({
     ws,
     userId,
     idleCallback,
-    onEmpty: () => delete roomCache[roomId],
+    onEmpty: () => {
+      delete roomCache[roomId];
+      console.info(`Closed room "${roomId}"`);
+    },
   });
 
   roomCache[roomId] = room;
+  console.info(`Created room "${roomId}"`);
   return room;
 };
 

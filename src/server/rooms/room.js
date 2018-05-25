@@ -24,7 +24,10 @@ class Room {
   _resetIdleTimeout(user) {
     const {userId, idleCallback} = user;
     this._clearIdleTimeout(userId);
-    this._timeouts[userId] = setTimeout(idleCallback, USER_TIMEOUT);
+    this._timeouts[userId] = setTimeout(() => {
+      console.info(`Booting inactive user from "${this.roomId}"`);
+      idleCallback();
+    }, USER_TIMEOUT);
   }
 
   _clearIdleTimeout = userId => {
@@ -41,6 +44,9 @@ class Room {
     const newUser = {userId, life, ws, idleCallback};
     this._resetIdleTimeout(newUser);
     this._users = _users.concat(newUser);
+    console.info(
+      `Added user to "${this.roomId}", count: ${this._users.length}`
+    );
   }
 
   updateUser({userId, life}) {
@@ -62,6 +68,9 @@ class Room {
   removeUser(userId) {
     this._users = this._users.filter(isNotUser(userId));
     this._clearIdleTimeout(userId);
+    console.info(
+      `Removed user from "${this.roomId}", count: ${this._users.length}`
+    );
     if (this._users.length === 0) this.onEmpty();
   }
 }
