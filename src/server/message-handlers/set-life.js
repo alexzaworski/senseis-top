@@ -7,7 +7,7 @@ import wsSend from '../ws-send';
 
 const setLifeHandler = ({data}) => {
   const {password, roomId, userId, life} = data;
-  const room = getRoom({password, roomId});
+  const room = getRoom({password, roomId, strict: true});
   room.updateUser({userId, life});
   room.usersExcept(userId).forEach(user => {
     wsSend(user.ws, {

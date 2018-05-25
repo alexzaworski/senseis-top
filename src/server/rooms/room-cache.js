@@ -1,11 +1,16 @@
-import {INVALID_PASS, MISSING_ROOM_ID} from '../../shared/error-codes';
+import {
+  INVALID_PASS,
+  MISSING_ROOM_ID,
+  ROOM_NOT_FOUND,
+} from '../../shared/error-codes';
 
 import Room from './room';
 
 const roomCache = {};
 
-export const getRoom = ({roomId, password}) => {
+export const getRoom = ({roomId, password, strict = false}) => {
   const room = roomCache[roomId];
+  if (!room && strict) throw ROOM_NOT_FOUND;
   if (!room) return null;
   if (room.password !== password) throw INVALID_PASS;
   return room;
