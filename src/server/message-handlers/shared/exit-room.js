@@ -1,6 +1,6 @@
 import {UPDATE_USERS} from '../../../shared/action-types';
 
-import {getRoom} from '../../room-cache';
+import {getRoom} from '../../rooms/room-cache';
 import {getUserData} from '../../user-helpers';
 
 import broadcastRoomList from './broadcast-room-list';

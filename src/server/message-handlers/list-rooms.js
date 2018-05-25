@@ -1,5 +1,5 @@
 import {LIST_ROOMS_SUCCESS} from '../../shared/action-types';
-import {listRooms} from '../room-cache';
+import {listRooms} from '../rooms/room-cache';
 import wsSend from '../ws-send';
 
 const listRoomsHandler = ({ws}) => {

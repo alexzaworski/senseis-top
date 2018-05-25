@@ -1,6 +1,6 @@
 import {LIST_ROOMS_SUCCESS} from '../../../shared/action-types';
 
-import {listRooms} from '../../room-cache';
+import {listRooms} from '../../rooms/room-cache';
 import {broadcastToSockets} from '../../socket-cache';
 
 const broadcastRoomList = () => {
