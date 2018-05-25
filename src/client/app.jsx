@@ -97,7 +97,7 @@ class App extends React.PureComponent {
         // joining aroom actually triggers LIST_ROOMS_SUCCESS by itself,
         // but we want to dispatch it above regardless in case this
         // errors out.
-        this.wsSend(Object.assign({type: JOIN_ROOM_REQUEST}, roomToJoin, self));
+        this.wsSend({type: JOIN_ROOM_REQUEST, ...roomToJoin, ...self});
       }
     };
   };

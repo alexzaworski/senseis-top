@@ -8,15 +8,11 @@ const TextInput = ({inputProps, label, error, id}) => {
         {label}
       </label>
       <input
-        {...Object.assign(
-          {
-            id,
-            className: ['text-input', error && 'text-input--error']
-              .filter(Boolean)
-              .join(' '),
-          },
-          inputProps
-        )}
+        {...inputProps}
+        id={id}
+        className={['text-input', error && 'text-input--error']
+          .filter(Boolean)
+          .join(' ')}
       />
       {error && <div className="text-input-error">{error}</div>}
     </div>

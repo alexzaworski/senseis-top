@@ -53,9 +53,10 @@ class CreateRoom extends React.PureComponent {
     } = event;
     const {formData} = this.state;
     this.setState({
-      formData: Object.assign({}, formData, {
+      formData: {
+        ...formData,
         [id]: value,
-      }),
+      },
     });
   };
 
@@ -63,9 +64,7 @@ class CreateRoom extends React.PureComponent {
     event.preventDefault();
     const {formData} = this.state;
     const {life} = this.props;
-    this.context.wsSend(
-      Object.assign({type: JOIN_ROOM_REQUEST, life}, formData)
-    );
+    this.context.wsSend({type: JOIN_ROOM_REQUEST, life, ...formData});
   };
 
   messageForErrorCode = code => {

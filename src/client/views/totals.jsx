@@ -29,9 +29,7 @@ class Totals extends React.PureComponent {
     if (!activeRoom) return;
     if (self.life === prevSelf.life) return;
 
-    this.context.wsSend(
-      Object.assign({type: SET_LIFE_REQUEST}, self, activeRoom)
-    );
+    this.context.wsSend({type: SET_LIFE_REQUEST, ...self, ...activeRoom});
   }
 
   createPointerDownHandler = lifeTotalFn => {
