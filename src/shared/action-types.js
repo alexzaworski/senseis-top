@@ -18,4 +18,6 @@ export const WS_ERROR = 'WS_ERROR';
 export const UPDATE_USERS = 'UPDATE_USERS';
 export const CLEAR_ERROR = 'CLEAR_ERROR';
 export const CLEAR_TOAST = 'CLEAR_TOAST';
+
 export const CONNECTION_OPENED = 'CONNECTION_OPENED';
+export const CONNECTION_LOST = 'CONNECTION_LOST';

@@ -4,10 +4,7 @@ import {connect} from 'react-redux';
 import {CLEAR_TOAST} from '../../shared/action-types';
 import Icon from '../components/icon';
 
-import errorMessageForCode from '../util/error-message-for-code';
-import successMessageForAction from '../util/success-message-for-action';
-
-const toastDuration = 2500;
+const TOAST_DURATION = 2500;
 
 class Toast extends React.PureComponent {
   static propTypes = {
@@ -29,7 +26,7 @@ class Toast extends React.PureComponent {
       this.setState({active: true});
       this.timeout = setTimeout(() => {
         this.setState({active: false});
-      }, toastDuration);
+      }, TOAST_DURATION);
     }
   }
 
@@ -49,13 +46,9 @@ class Toast extends React.PureComponent {
     if (!toast) return null;
 
     const {active} = this.state;
-    const {toastType} = toast;
+    const {toastType, message} = toast;
     const isError = toastType === 'error';
     const isSuccess = toastType === 'success';
-
-    const message = isError
-      ? errorMessageForCode(toast.code)
-      : successMessageForAction(toast.action);
 
     return (
       <div className="toast-wrap">

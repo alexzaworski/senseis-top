@@ -1,12 +1,11 @@
-import {CONNECTION_OPENED, WS_ERROR} from '../../shared/action-types';
-import {CONNECTION_LOST} from '../../shared/error-codes';
+import {CONNECTION_OPENED, CONNECTION_LOST} from '../../shared/action-types';
 
 const socketConnected = (state = false, action) => {
   switch (action.type) {
     case CONNECTION_OPENED:
       return true;
-    case WS_ERROR:
-      return action.error === CONNECTION_LOST ? false : state;
+    case CONNECTION_LOST:
+      return false;
     default:
       return state;
   }

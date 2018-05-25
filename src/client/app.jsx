@@ -13,11 +13,10 @@ import {
 import {
   LIST_ROOMS_REQUEST,
   JOIN_ROOM_REQUEST,
-  WS_ERROR,
   CONNECTION_OPENED,
+  CONNECTION_LOST,
 } from '../shared/action-types';
 
-import {CONNECTION_LOST} from '../shared/error-codes';
 import Totals from './views/totals';
 import RoomList from './views/room-list';
 import JoinRoom from './views/join-room';
@@ -164,7 +163,7 @@ const mapDispatchToProps = dispatch => {
       dispatch(message);
     },
     connectionLost: () => {
-      dispatch({type: WS_ERROR, error: CONNECTION_LOST});
+      dispatch({type: CONNECTION_LOST});
     },
     connectionOpened: () => {
       dispatch({type: CONNECTION_OPENED});
