@@ -1,3 +1,5 @@
+import wsSend from './ws-send';
+
 let socketCache = [];
 
 export const cacheSocket = ws => {
@@ -5,7 +7,11 @@ export const cacheSocket = ws => {
   ws.on('close', () => removeSocket(ws));
 };
 
-export const getAllSockets = () => socketCache;
+export const broadcastToSockets = payload => {
+  socketCache.forEach(socket => {
+    wsSend(socket, payload);
+  });
+};
 
 const removeSocket = ws => {
   socketCache = socketCache.filter(socket => socket !== ws);

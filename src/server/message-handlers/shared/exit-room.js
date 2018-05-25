@@ -3,7 +3,7 @@ import {UPDATE_USERS} from '../../../shared/action-types';
 import {getRoom} from '../../room-cache';
 import {getUserData} from '../../user-helpers';
 
-import broadcastRooms from './broadcast-rooms';
+import broadcastRoomList from './broadcast-room-list';
 import wsSend from '../../ws-send';
 
 const exitRoom = ({data}) => {
@@ -14,7 +14,7 @@ const exitRoom = ({data}) => {
 
   room.removeUser(userId);
   const hasRemainingUsers = room.users().length > 0;
-  broadcastRooms();
+  broadcastRoomList();
 
   if (hasRemainingUsers) {
     room.users().forEach(user => {
