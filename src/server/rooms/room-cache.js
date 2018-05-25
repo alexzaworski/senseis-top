@@ -25,7 +25,7 @@ export const createRoom = ({
   idleCallback,
 }) => {
   if (String(roomId).length === 0) throw MISSING_ROOM_ID;
-
+  console.info(`Creating room "${roomId}"`);
   const room = new Room({
     roomId,
     password,
@@ -40,7 +40,6 @@ export const createRoom = ({
   });
 
   roomCache[roomId] = room;
-  console.info(`Created room "${roomId}"`);
   return room;
 };
 
