@@ -3,12 +3,7 @@ import PropTypes from 'prop-types';
 import {hot} from 'react-hot-loader';
 import {connect} from 'react-redux';
 import NoSleep from 'nosleep.js/dist/NoSleep.js'; // uglify barfing on es6 in src
-import {
-  BrowserRouter as Router,
-  Route,
-  Redirect,
-  Switch,
-} from 'react-router-dom';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
 
 import {
   LIST_ROOMS_REQUEST,
@@ -18,11 +13,8 @@ import {
 } from '../shared/action-types';
 
 import Totals from './views/totals';
-import RoomList from './views/room-list';
-import JoinRoom from './views/join-room';
-import ActiveRoom from './views/active-room';
+import Rooms from './views/rooms';
 
-import FullPageLoader from './components/full-page-loader';
 import TabBar from './components/tab-bar';
 import Toast from './components/toast';
 
@@ -36,9 +28,7 @@ const retryTimeout = 2000;
 class App extends React.PureComponent {
   static propTypes = {
     dispatchSocketMessage: PropTypes.func,
-    rooms: PropTypes.array,
     activeRoom: PropTypes.object,
-    attemptedRoom: PropTypes.string,
     self: PropTypes.object,
     storedRoom: PropTypes.object,
     connectionLost: PropTypes.func,
@@ -107,29 +97,11 @@ class App extends React.PureComponent {
   };
 
   render() {
-    const {rooms, activeRoom, attemptedRoom} = this.props;
     return (
       <Router>
         <div className="view-wrap">
           <Route exact path="/" component={Totals} />
-          <Switch>
-            {!rooms && <Route path="/rooms" component={FullPageLoader} />}
-
-            {activeRoom ? (
-              <Switch>
-                <Route path="/rooms/active" component={ActiveRoom} />
-                <Redirect from="/rooms/join" to="/" />
-                <Redirect from="/rooms" to="/rooms/active" />
-              </Switch>
-            ) : (
-              <Redirect from="/rooms/active" to="/rooms" />
-            )}
-
-            <Route path="/rooms/join" component={JoinRoom} />
-            {attemptedRoom && <Redirect from="/rooms" to="/rooms/join" />}
-
-            <Route path="/rooms" component={RoomList} />
-          </Switch>
+          <Route path="/rooms" component={Rooms} />
           <Toast />
           <TabBar />
         </div>
@@ -139,18 +111,9 @@ class App extends React.PureComponent {
 }
 
 const mapStateToProps = state => {
-  const {
-    rooms,
-    activeRoom,
-    attemptedRoom,
-    self,
-    storedRoom,
-    socketConnected,
-  } = state;
+  const {activeRoom, self, storedRoom, socketConnected} = state;
   return {
-    rooms,
     activeRoom,
-    attemptedRoom,
     self,
     storedRoom,
     socketConnected,

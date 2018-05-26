@@ -2,16 +2,16 @@ import React, {Fragment} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
-import TextInput from '../components/text-input';
-import errorMessageForCode from '../util/error-message-for-code';
-import clearErrorForCause from '../actions/clear-error-for-cause';
+import TextInput from '../../components/text-input';
+import errorMessageForCode from '../../util/error-message-for-code';
+import clearErrorForCause from '../../actions/clear-error-for-cause';
 
 import {
   JOIN_ROOM_REQUEST,
   CLEAR_ATTEMPTED_ROOM,
-} from '../../shared/action-types';
+} from '../../../shared/action-types';
 
-import {INVALID_PASS, USER_EXISTS} from '../../shared/error-codes';
+import {INVALID_PASS, USER_EXISTS} from '../../../shared/error-codes';
 
 class CreateRoom extends React.PureComponent {
   static contextTypes = {

@@ -2,10 +2,10 @@ import React, {Fragment} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
-import {maxRoomSize} from '../../shared/config';
+import {maxRoomSize} from '../../../shared/config';
 import {Link} from 'react-router-dom';
-import Icon from '../components/icon/';
-import {SET_ATTEMPTED_ROOM} from '../../shared/action-types';
+import Icon from '../../components/icon/';
+import {SET_ATTEMPTED_ROOM} from '../../../shared/action-types';
 
 class Rooms extends React.PureComponent {
   static propTypes = {
