@@ -3,7 +3,12 @@ import PropTypes from 'prop-types';
 import {hot} from 'react-hot-loader';
 import {connect} from 'react-redux';
 import NoSleep from 'nosleep.js/dist/NoSleep.js'; // uglify barfing on es6 in src
-import {BrowserRouter as Router, Route} from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+} from 'react-router-dom';
 
 import {
   LIST_ROOMS_REQUEST,
@@ -100,8 +105,11 @@ class App extends React.PureComponent {
     return (
       <Router>
         <div className="view-wrap">
-          <Route exact path="/" component={Totals} />
-          <Route path="/rooms" component={Rooms} />
+          <Switch>
+            <Route exact path="/" component={Totals} />
+            <Route path="/rooms" component={Rooms} />
+            <Redirect to="/" />
+          </Switch>
           <Toast />
           <TabBar />
         </div>
