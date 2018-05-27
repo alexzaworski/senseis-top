@@ -17,18 +17,18 @@ html {
 }
 
 *,
-*:before,
-*:after {
+*::before,
+*::after {
   box-sizing: inherit;
 }
 
 body {
+  background: darken($dark-purple, 15%);
+  color: $white;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial,
     sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
-  background: darken($darkPurple, 15%);
   margin: 0;
   overscroll-behavior-y: none;
-  color: #fff;
 }
 
 h1,
@@ -57,31 +57,32 @@ a {
 }
 
 .app-root {
-  position: fixed;
-  top: 0;
-  left: 0;
   bottom: 0;
+  left: 0;
+  position: fixed;
   right: 0;
+  top: 0;
 }
 
 .view-wrap {
-  max-width: 768px;
-  margin: 0 auto;
+  background: $dark-purple;
+  box-shadow: 0 0 160px 20px rgba($black, 0.25);
   display: flex;
   flex-direction: column;
   height: 100%;
-  background: $darkPurple;
-  box-shadow: 0 0 160px 20px rgba(#000, 0.25);
+  margin: 0 auto;
+  max-width: 768px;
 }
 
 .view-main {
   flex-grow: 1;
-  padding: 16px;
   overflow: auto;
   -webkit-overflow-scrolling: touch;
+  padding: 16px;
+
   &--centered {
+    align-items: center;
     display: flex;
     justify-content: center;
-    align-items: center;
   }
 }

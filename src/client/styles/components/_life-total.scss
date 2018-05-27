@@ -1,21 +1,20 @@
 .life-total {
-  margin-bottom: 15%;
   flex-grow: 1;
+  margin-bottom: 15%;
   text-align: center;
-}
 
-.life-total__number {
-  font-size: 10em;
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-}
+  &__number {
+    font-size: 10em;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
 
-.life-total__control {
-  font-size: 2rem;
-  width: 80px;
-  padding: 12px 0 16px;
-  margin: 0 12px;
-  user-select: none;
-  -webkit-user-select: none;
-  -webkit-touch-callout: none;
+  &__control {
+    font-size: 2rem;
+    margin: 0 12px;
+    padding: 12px 0 16px;
+    -webkit-touch-callout: none;
+    user-select: none;
+    width: 80px;
+  }
 }

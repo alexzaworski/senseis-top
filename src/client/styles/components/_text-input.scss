@@ -3,28 +3,29 @@
 }
 
 .text-input-label {
-  font-size: 0.75rem;
+  color: rgba($white, 0.75);
   display: block;
-  color: rgba(#fff, 0.75);
+  font-size: 0.75rem;
   margin-bottom: 8px;
 }
 
 .text-input {
-  display: block;
+  appearance: none;
   background: none;
-  border: 2px solid rgba(#fff, 0.15);
-  width: 100%;
-  font-size: 1rem;
+  border: 2px solid rgba($white, 0.15);
   border-radius: 4px;
+  color: $white;
+  display: block;
+  font-size: 1rem;
   padding: 8px;
-  color: #fff;
-  -webkit-appearance: none;
+  width: 100%;
+
   &--error {
     border-color: $red;
   }
 
   &:focus {
-    border-color: $lightBlue;
+    border-color: $light-blue;
     outline: none;
   }
 }

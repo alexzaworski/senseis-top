@@ -1,44 +1,46 @@
-.totals-bar {
-  display: flex;
-}
-
-.totals-bar__user {
-  flex-grow: 1;
-  flex-shrink: 0;
-  flex-basis: 25%;
-  text-align: center;
-  overflow: hidden;
-}
-
-$barColors: (
+$bar-colors: (
   $red,
   $green,
-  $lightBlue,
-  $lightPurple
+  $light-blue,
+  $light-purple
 );
 
-.totals-bar__user-id {
-  text-transform: uppercase;
-  font-size: 0.75em;
-  font-weight: bold;
-  color: rgba(#fff, 0.65);
-  padding: 8px;
-  border-bottom: 2px solid $red;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  @for $i from 1 through length($barColors) {
-    .totals-bar__user:nth-of-type(#{$i}n) & {
-      border-color: nth($barColors, $i);
+.totals-bar {
+  $elem: &;
+  display: flex;
+
+  &__user {
+    flex-basis: 25%;
+    flex-grow: 1;
+    flex-shrink: 0;
+    overflow: hidden;
+    text-align: center;
+  }
+
+  &__user-id {
+    border-bottom: 2px solid $red;
+    color: rgba($white, 0.65);
+    font-size: 0.75em;
+    font-weight: bold;
+    overflow: hidden;
+    padding: 8px;
+    text-overflow: ellipsis;
+    text-transform: uppercase;
+    white-space: nowrap;
+
+    @for $i from 1 through length($bar-colors) {
+      #{$elem}__user:nth-of-type(#{$i}n) & {
+        border-color: nth($bar-colors, $i);
+      }
     }
   }
-}
 
-.totals-bar__user-life {
-  background: linear-gradient(rgba(#fff, 0.1), rgba(#fff, 0.05));
-  padding: 4px;
-  font-size: 2em;
-  font-weight: bold;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  &__user-life {
+    background: linear-gradient(rgba($white, 0.1), rgba($white, 0.05));
+    font-size: 2em;
+    font-weight: bold;
+    overflow: hidden;
+    padding: 4px;
+    text-overflow: ellipsis;
+  }
 }

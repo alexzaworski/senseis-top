@@ -1,29 +1,30 @@
 .header {
-  padding: 40px 16px 20px;
-  background: linear-gradient(rgba(#fff, 0.1), rgba(#fff, 0.05));
+  background: linear-gradient(rgba($white, 0.1), rgba($white, 0.05));
   margin-bottom: 8px;
-}
+  padding: 40px 16px 20px;
 
-.header__title {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  margin-right: 8px;
-  white-space: nowrap;
-  flex-grow: 1;
-}
+  &__title {
+    flex-grow: 1;
+    margin-right: 8px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 
-.header__icon {
-  fill: rgba(#fff, 0.25);
-  height: 24px;
-  width: 24px;
-  margin: auto 8px auto 0;
-  flex-shrink: 0;
-}
+  &__icon {
+    fill: rgba($white, 0.25);
+    flex-shrink: 0;
+    height: 24px;
+    margin: auto 8px auto 0;
+    width: 24px;
+  }
 
-.header__title-wrap {
-  display: flex;
-  justify-content: space-between;
-  .button {
-    margin: auto 0;
+  &__title-wrap {
+    display: flex;
+    justify-content: space-between;
+
+    .button {
+      margin: auto 0;
+    }
   }
 }
