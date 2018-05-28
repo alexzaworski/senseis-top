@@ -1,6 +1,7 @@
 const merge = require('webpack-merge');
 const common = require('./webpack.common.js');
 const path = require('path');
+const {HotModuleReplacementPlugin} = require('webpack');
 
 module.exports = merge(common, {
   module: {
@@ -27,7 +28,10 @@ module.exports = merge(common, {
   },
   devtool: 'cheap-module-source-map',
   devServer: {
+    hot: true,
+    host: '0.0.0.0',
     contentBase: path.resolve('static'),
     historyApiFallback: true,
   },
+  plugins: [new HotModuleReplacementPlugin()],
 });
