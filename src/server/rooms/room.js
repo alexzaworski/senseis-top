@@ -4,6 +4,7 @@ import {
   USER_NOT_FOUND,
   USER_EXISTS,
   ROOM_FULL,
+  INVALID_LIFE,
 } from '../../shared/error-codes';
 import {isUser, isNotUser} from '../user-helpers';
 import {maxRoomSize} from '../../shared/config';
@@ -38,6 +39,7 @@ class Room {
     const {_users} = this;
 
     if (String(userId).length === 0) throw MISSING_USER_ID;
+    if (isNaN(life)) throw INVALID_LIFE;
     if (_users.some(u => u.userId === userId)) throw USER_EXISTS;
     if (_users.length === maxRoomSize) throw ROOM_FULL;
 
@@ -52,9 +54,10 @@ class Room {
   updateUser({userId, life}) {
     const user = this._users.find(isUser(userId));
     if (!user) throw USER_NOT_FOUND;
+    if (isNaN(life)) throw INVALID_LIFE;
 
     this._resetIdleTimeout(user);
-    user.life = life;
+    user.life = parseInt(life);
   }
 
   users() {
