@@ -1,7 +1,12 @@
 .header {
   padding: 40px 16px 20px;
-  background: linear-gradient(rgba(#fff, 0.1), rgba(#fff, 0.05));
-  margin-bottom: 8px;
+  background: rgba(#fff, .075);
+  &--collapsed {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    padding: 12px 4px;
+  }
 }
 
 .header__title {
@@ -21,9 +26,25 @@
 }
 
 .header__title-wrap {
+  width: 100%;
   display: flex;
   justify-content: space-between;
   .button {
     margin: auto 0;
   }
+}
+
+.header__back-link {
+  color: $lightBlue;
+  display: inline-flex;
+  align-items: center;
+  font-weight: bold;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: .02em;
+}
+
+.header__back-link__icon {
+  fill: $lightBlue;
+  margin-right: 2px;
 }
