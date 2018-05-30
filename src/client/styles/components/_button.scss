@@ -16,7 +16,7 @@
     box-shadow: 0 0 0 2px darken($darkPurple, 15%);
   }
   &--secondary {
-    background: linear-gradient(rgba(white, 0.2), rgba(white, 0.05));
+    background: linear-gradient(rgba(white, 0.1), rgba(white, 0.05));
   }
   &--danger {
     background: linear-gradient($red 0%, $magenta 100%);
