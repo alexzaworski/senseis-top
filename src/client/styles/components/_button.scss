@@ -21,6 +21,14 @@
   &--danger {
     background: linear-gradient($red 0%, $magenta 100%);
   }
+  &--plain {
+    padding: 0;
+    border: 0;
+    background: transparent;
+    &:focus:not(:active) {
+      box-shadow: none;
+    }
+  }
 }
 
 .button-group {

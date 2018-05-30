@@ -15,10 +15,11 @@ const persistToLocalStorage = ({getState}) => {
   return next => action => {
     next(action);
     const currentState = getState();
-    const {self, activeRoom} = currentState;
+    const {self, activeRoom, settings} = currentState;
     const saveState = {
       self,
       storedRoom: activeRoom,
+      storedSettings: settings,
     };
     localStorage.setItem(STORAGE_KEY, JSON.stringify(saveState));
   };
@@ -44,9 +45,19 @@ const store = createStore(
   compose(applyMiddleware(persistToLocalStorage), devToolsEnhancer())
 );
 
-ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  document.getElementById('root')
-);
+// This timeout is to prevent a flash of unstyled content
+// caused by webpack's style-loader when running the app
+// in development. We have to prevent FUOC since some
+// components rely on styles being active on mount to
+// measure element sizes.
+//
+// It's not needed in prod since style sheets are loaded
+// via <link>s in the header, but it shouldn't hurt anything.
+setTimeout(() => {
+  ReactDOM.render(
+    <Provider store={store}>
+      <App />
+    </Provider>,
+    document.getElementById('root')
+  );
+});

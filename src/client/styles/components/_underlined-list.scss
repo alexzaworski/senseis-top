@@ -5,9 +5,6 @@
 }
 
 .underlined-list__item {
-  display: flex;
-  align-items: center;
-
   &--active {
     color: $lightBlue;
     font-weight: bold;
@@ -20,7 +17,18 @@
   }
 }
 
+.underlined-list__item,
+.underlined-list__item-wrap {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
 .underlined-list__primary {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-right: 8px;
   flex-grow: 1;
 }
 

@@ -31,6 +31,9 @@ const TabBar = () => {
       <TabItem to="/rooms">
         <Icon className="tab-bar__item-icon" symbol="globe" />
       </TabItem>
+      <TabItem to="/settings">
+        <Icon className="tab-bar__item-icon" symbol="cog" />
+      </TabItem>
     </nav>
   );
 };

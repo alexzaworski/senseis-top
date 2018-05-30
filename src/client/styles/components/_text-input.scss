@@ -27,6 +27,11 @@
     border-color: $lightBlue;
     outline: none;
   }
+
+  &:invalid {
+    // drops red outline in firefox
+    box-shadow: none;
+  }
 }
 
 .text-input-error {

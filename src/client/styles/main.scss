@@ -1,4 +1,5 @@
 @import './vars/colors';
+
 @import './components/tab-bar';
 @import './components/header';
 @import './components/button';
@@ -53,6 +54,7 @@ h3 {
 }
 
 a {
+  color: white;
   text-decoration: none;
 }
 

@@ -3,10 +3,12 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import TotalsBar from '../components/totals-bar';
 import PointerHandler from '../components/pointer-down-handler';
+import Icon from '../components/icon';
 import {
   INCREMENT_LIFE,
   DECREMENT_LIFE,
   SET_LIFE_REQUEST,
+  RESET_LIFE,
 } from '../../shared/action-types';
 
 class Totals extends React.PureComponent {
@@ -16,6 +18,8 @@ class Totals extends React.PureComponent {
     otherUsers: PropTypes.array,
     incrementLife: PropTypes.func,
     decrementLife: PropTypes.func,
+    defaultLife: PropTypes.number,
+    resetLife: PropTypes.func,
   };
 
   static contextTypes = {
@@ -30,6 +34,10 @@ class Totals extends React.PureComponent {
     if (self.life === prevSelf.life) return;
 
     this.context.wsSend({type: SET_LIFE_REQUEST, ...self, ...activeRoom});
+  }
+
+  componentWillUnmount() {
+    this.clearTimeouts();
   }
 
   createPointerDownHandler = lifeTotalFn => {
@@ -50,9 +58,10 @@ class Totals extends React.PureComponent {
     clearInterval(this.interval);
   };
 
-  componentWillUnmount() {
-    this.clearTimeouts();
-  }
+  resetLife = () => {
+    const {defaultLife, resetLife} = this.props;
+    resetLife(defaultLife);
+  };
 
   render() {
     const {
@@ -87,6 +96,10 @@ class Totals extends React.PureComponent {
                 )}
               </PointerHandler>
             </div>
+
+            <button onClick={this.resetLife} className="button button--plain">
+              <Icon symbol="reset" className="life-total__reset" />
+            </button>
           </div>
         </main>
       </Fragment>
@@ -95,11 +108,17 @@ class Totals extends React.PureComponent {
 }
 
 const mapStateToProps = state => {
-  const {self, activeRoom, otherUsers} = state;
+  const {
+    self,
+    activeRoom,
+    otherUsers,
+    settings: {defaultLife},
+  } = state;
   return {
     self,
     activeRoom,
     otherUsers,
+    defaultLife,
   };
 };
 
@@ -107,6 +126,7 @@ const mapDispatchToProps = dispatch => {
   return {
     incrementLife: () => dispatch({type: INCREMENT_LIFE}),
     decrementLife: () => dispatch({type: DECREMENT_LIFE}),
+    resetLife: life => dispatch({type: RESET_LIFE, life}),
   };
 };
 

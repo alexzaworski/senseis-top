@@ -10,6 +10,7 @@ import self from './self';
 import createErrorReducer from './create-error-reducer';
 import toast from './toast';
 import socketConnected from './socket-connected';
+import settings from './settings';
 
 const noop = state => state || null;
 
@@ -21,7 +22,9 @@ const reducers = combineReducers({
   attemptedRoom,
   toast,
   socketConnected,
+  settings,
   storedRoom: noop,
+  storedSettings: noop,
   errors: combineReducers({
     joinRoom: createErrorReducer({
       cause: JOIN_ROOM_REQUEST,

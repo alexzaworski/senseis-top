@@ -15,10 +15,12 @@ import {
   JOIN_ROOM_REQUEST,
   CONNECTION_OPENED,
   CONNECTION_LOST,
+  UPDATE_SETTINGS,
 } from '../shared/action-types';
 
 import Totals from './views/totals';
 import Rooms from './views/rooms';
+import Settings from './views/settings';
 
 import TabBar from './components/tab-bar';
 import Toast from './components/toast';
@@ -39,6 +41,8 @@ class App extends React.PureComponent {
     connectionLost: PropTypes.func,
     connectionOpened: PropTypes.func,
     socketConnected: PropTypes.bool,
+    storedSettings: PropTypes.object,
+    initSettings: PropTypes.func,
   };
 
   static childContextTypes = {
@@ -50,6 +54,8 @@ class App extends React.PureComponent {
     document.addEventListener('touchend', () => noSleep.enable(), {
       once: true,
     });
+    const {storedSettings, initSettings} = this.props;
+    storedSettings && initSettings(storedSettings);
     this.connect();
   }
 
@@ -108,6 +114,7 @@ class App extends React.PureComponent {
           <Switch>
             <Route exact path="/" component={Totals} />
             <Route path="/rooms" component={Rooms} />
+            <Route path="/settings" component={Settings} />
             <Redirect to="/" />
           </Switch>
           <Toast />
@@ -119,12 +126,13 @@ class App extends React.PureComponent {
 }
 
 const mapStateToProps = state => {
-  const {activeRoom, self, storedRoom, socketConnected} = state;
+  const {activeRoom, self, storedRoom, socketConnected, storedSettings} = state;
   return {
     activeRoom,
     self,
     storedRoom,
     socketConnected,
+    storedSettings,
   };
 };
 
@@ -138,6 +146,9 @@ const mapDispatchToProps = dispatch => {
     },
     connectionOpened: () => {
       dispatch({type: CONNECTION_OPENED});
+    },
+    initSettings: storedSettings => {
+      dispatch({type: UPDATE_SETTINGS, settings: storedSettings});
     },
   };
 };
