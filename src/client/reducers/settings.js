@@ -19,7 +19,7 @@ const settings = (state = defaultSettings, action) => {
   const {type, settings} = action;
   switch (type) {
     case UPDATE_SETTINGS:
-      return mergeAndValidateSettings(settings);
+      return mergeAndValidateSettings({...state, ...settings});
     default:
       return state;
   }
