@@ -10,10 +10,11 @@ class RouteHeader extends React.Component {
   static propTypes = {
     path: PropTypes.string,
     label: PropTypes.string,
+    renderDefaultHeader: PropTypes.func,
   };
 
   render() {
-    const {path, label} = this.props;
+    const {path, label, renderDefaultHeader} = this.props;
     return (
       <Route path={path}>
         {({match: {isExact}}) => {
@@ -31,7 +32,11 @@ class RouteHeader extends React.Component {
                       .join(' ')}
                   >
                     {isExact ? (
-                      <h2 className="header__title">{label}</h2>
+                      renderDefaultHeader ? (
+                        renderDefaultHeader()
+                      ) : (
+                        <h2 className="header__title">{label}</h2>
+                      )
                     ) : (
                       <Link to={path} replace className="header__back-link">
                         <Icon

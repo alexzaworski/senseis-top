@@ -46,7 +46,7 @@ class ActiveRoom extends React.PureComponent {
         <header className="header">
           <div className="header__title-wrap">
             {isPrivate && <Icon symbol="lock" className="header__icon" />}
-            <h3 className="header__title">{roomId}</h3>
+            <h2 className="header__title">{roomId}</h2>
           </div>
         </header>
         <main className="view-main">
