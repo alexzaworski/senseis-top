@@ -1,11 +1,11 @@
 import React, {Fragment} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-
-import {maxRoomSize} from '../../../shared/config';
 import {Link} from 'react-router-dom';
-import Icon from '../../components/icon/';
+
 import {SET_ATTEMPTED_ROOM} from '../../../shared/action-types';
+import Icon from '../../components/icon/';
+import {maxRoomSize} from '../../../shared/config';
 
 class Rooms extends React.PureComponent {
   static propTypes = {
@@ -72,4 +72,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Rooms);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Rooms);

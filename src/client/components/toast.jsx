@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {CLEAR_TOAST} from '../../shared/action-types';
+
 import Icon from '../components/icon';
+import {CLEAR_TOAST} from '../../shared/action-types';
 
 const TOAST_DURATION = 2500;
 
@@ -85,4 +86,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Toast);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Toast);

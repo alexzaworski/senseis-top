@@ -1,6 +1,7 @@
-import React, {Fragment} from 'react';
-import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
+import React, {Fragment} from 'react';
+
 import TotalsBar from '../components/totals-bar';
 import PointerHandler from '../components/pointer-down-handler';
 import Icon from '../components/icon';
@@ -130,4 +131,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Totals);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Totals);

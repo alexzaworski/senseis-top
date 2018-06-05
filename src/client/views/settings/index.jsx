@@ -1,5 +1,5 @@
-import React, {Fragment} from 'react';
 import {Route} from 'react-router-dom';
+import React, {Fragment} from 'react';
 
 import RouteHeader from '../../components/route-header';
 

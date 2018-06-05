@@ -4,8 +4,8 @@ import {createStore, compose, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
 import {devToolsEnhancer} from 'redux-devtools-extension';
 
-import reducers from './reducers';
 import App from './app';
+import reducers from './reducers';
 
 import './styles/main.scss';
 

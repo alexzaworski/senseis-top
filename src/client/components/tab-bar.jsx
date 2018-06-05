@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {NavLink} from 'react-router-dom';
+
 import Icon from './icon';
 
 const TabItem = ({to, exact, children}) => {

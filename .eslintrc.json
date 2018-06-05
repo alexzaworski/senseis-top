@@ -12,10 +12,21 @@
       "jsx": true
     }
   },
-  "plugins": ["react"],
+  "plugins": ["react","import"],
   "rules": {
     "semi": ["error", "always"],
     "comma-dangle": [1, "always-multiline"],
-    "no-console": ["error", {"allow": ["error", "info"]}]
+    "no-console": ["error", {"allow": ["error", "info"]}],
+    "import/order": ["error", {
+      "newlines-between": "always",
+      "groups": [
+          "builtin",
+          "external",
+          "parent",
+          "sibling",
+          "index"
+        ]
+      }
+    ]
   }
 }

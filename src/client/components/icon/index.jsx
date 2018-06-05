@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import {getDef, getSize} from './defs';
 
 export default class Icon extends React.PureComponent {

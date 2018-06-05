@@ -1,9 +1,9 @@
 import React, {Fragment} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {LEAVE_ROOM_REQUEST} from '../../../shared/action-types';
 
 import Icon from '../../components/icon/index';
+import {LEAVE_ROOM_REQUEST} from '../../../shared/action-types';
 
 class ActiveRoom extends React.PureComponent {
   static contextTypes = {

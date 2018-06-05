@@ -21,7 +21,6 @@ import {
 import Totals from './views/totals';
 import Rooms from './views/rooms';
 import Settings from './views/settings';
-
 import TabBar from './components/tab-bar';
 import Toast from './components/toast';
 

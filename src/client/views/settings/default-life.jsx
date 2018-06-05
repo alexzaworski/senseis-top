@@ -3,9 +3,8 @@ import PropTypes from 'prop-types';
 import {Link, Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 
-import {UPDATE_SETTINGS} from '../../../shared/action-types';
-
 import TextInput from '../../components/text-input';
+import {UPDATE_SETTINGS} from '../../../shared/action-types';
 
 class DefaultLife extends React.PureComponent {
   static propTypes = {
@@ -87,4 +86,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(DefaultLife);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(DefaultLife);
