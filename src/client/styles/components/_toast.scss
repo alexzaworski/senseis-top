@@ -3,7 +3,6 @@
 }
 
 .toast {
-  $elem: &;
   align-items: center;
   animation: toast-out 0.15s cubic-bezier(0.4, 0, 1, 1) forwards;
   background: darken($dark-purple, 7.5%);
@@ -14,37 +13,31 @@
   left: 8px;
   position: absolute;
   right: 8px;
-
-  &__icon {
-    flex-shrink: 0;
-    height: 24px;
-    margin: auto 12px;
-    width: 24px;
-  }
-
-  &__message {
-    display: inline-block;
-    margin: auto 12px auto 0;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
-  &--error {
-    #{$elem}__icon {
-      fill: $red;
-    }
-  }
-
-  &--success {
-    #{$elem}__icon {
-      fill: $green;
-    }
-  }
-
   &--active {
     animation: toast-in 0.125s cubic-bezier(0, 0, 0.2, 1) forwards;
   }
+}
+
+.toast__icon {
+  flex-shrink: 0;
+  height: 24px;
+  margin: auto 12px;
+  width: 24px;
+  .toast--success & {
+    fill: $green;
+  }
+
+  .toast--error & {
+    fill: $red;
+  }
+}
+
+.toast__message {
+  display: inline-block;
+  margin: auto 12px auto 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 @mixin inactive-toast {

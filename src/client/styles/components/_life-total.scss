@@ -2,21 +2,21 @@
   flex-grow: 1;
   margin-bottom: 15%;
   text-align: center;
+}
 
-  &__number {
-    font-size: 10em;
-    font-weight: bold;
-    margin-bottom: 0.5rem;
-  }
+.life-total__number {
+  font-size: 10em;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
 
-  &__control {
-    font-size: 2rem;
-    margin: 0 12px;
-    padding: 12px 0 16px;
-    -webkit-touch-callout: none;
-    user-select: none;
-    width: 80px;
-  }
+.life-total__control {
+  font-size: 2rem;
+  margin: 0 12px;
+  padding: 12px 0 16px;
+  -webkit-touch-callout: none;
+  user-select: none;
+  width: 80px;
 }
 
 .life-total__reset {
