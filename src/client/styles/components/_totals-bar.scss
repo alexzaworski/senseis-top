@@ -1,20 +1,39 @@
-.tab-bar {
-  align-items: center;
-  background: linear-gradient(rgba($white, 0.05), rgba($white, 0.01));
+.totals-bar {
   display: flex;
+}
+
+.totals-bar__user {
+  flex-grow: 1;
   flex-shrink: 0;
-  height: 48px;
-  justify-content: center;
+  flex-basis: 25%;
+  text-align: center;
+  overflow: hidden;
 }
 
-.tab-bar__item {
-  height: 32px;
-  margin: 0 24px;
-}
+$bar-colors: ($red, $green, $light-blue, $light-purple);
 
-.tab-bar__item-icon {
-  fill: rgba($white, 0.25);
-  .tab-bar__item--active & {
-    fill: $light-blue;
+.totals-bar__user-id {
+  text-transform: uppercase;
+  font-size: 0.75em;
+  font-weight: bold;
+  color: rgba(#fff, 0.65);
+  padding: 8px;
+  border-bottom: 2px solid $red;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  @for $i from 1 through length($bar-colors) {
+    .totals-bar__user:nth-of-type(#{$i}n) & {
+      border-color: nth($bar-colors, $i);
+    }
   }
+}
+
+.totals-bar__user-life {
+  background: linear-gradient(rgba(#fff, 0.1), rgba(#fff, 0.05));
+  padding: 4px;
+  font-size: 2em;
+  font-weight: bold;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
