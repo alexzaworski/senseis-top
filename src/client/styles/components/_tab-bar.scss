@@ -1,20 +1,18 @@
 .tab-bar {
+  align-items: center;
+  background: linear-gradient(rgba($white, 0.05), rgba($white, 0.01));
+  display: flex;
   flex-shrink: 0;
   height: 48px;
-  display: flex;
   justify-content: center;
-  align-items: center;
-  background: linear-gradient(rgba(#fff, 0.05), rgba(#fff, 0.01));
 }
 
 .tab-bar__item {
+  fill: rgba($white, 0.25);
   height: 32px;
   margin: 0 24px;
-}
 
-.tab-bar__item-icon {
-  fill: rgba(#fff, 0.25);
-  .tab-bar__item--active & {
-    fill: $lightBlue;
+  &--active {
+    fill: $light-blue;
   }
 }

@@ -1,0 +1,18 @@
+{
+  "extends": "stylelint-config-recommended-scss",
+  "plugins": [
+    "stylelint-order"
+  ],
+  "rules": {
+    "max-nesting-depth": 3,
+    "scss/dollar-variable-pattern": "^[_]?[a-z]+([a-z0-9-]+[a-z0-9]+)?$",
+    "order/order": [
+      [
+        "custom-properties",
+        "dollar-variables",
+        "declarations",
+        "rules"
+      ]
+    ],
+  },
+}

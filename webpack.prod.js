@@ -16,6 +16,7 @@ module.exports = merge(common, {
               minimize: true,
             },
           },
+          'postcss-loader',
           'sass-loader',
         ]),
       },

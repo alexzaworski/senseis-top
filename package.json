@@ -3,6 +3,7 @@
     "start": "nf start",
     "clean": "rm -rf ./dist && mkdir ./dist",
     "build": "yarn run clean && yarn run build-server && yarn run build-client",
+    "stylelint": "stylelint \"src/client/styles/**/*.scss\" --syntax scss --fix",
     "start-server": "nodemon --watch ./src/server --watch ./src/shared --exec \" node src/server/\"",
     "start-client": "webpack-dev-server --config webpack.dev.js",
     "build-server": "yarn run babel-server && yarn run babel-shared",
@@ -10,10 +11,24 @@
     "babel-server": "BABEL_ENV=production babel ./src/server --out-dir ./dist/server",
     "babel-shared": "BABEL_ENV=production babel ./src/shared --out-dir ./dist/shared"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
   "name": "senseis-top",
   "version": "0.0.1",
   "license": "MIT",
   "author": "Alex Zaworski",
+  "lint-staged": {
+    "src/client/styles/**/*.scss": [
+      "stylelint --fix",
+      "git add"
+    ]
+  },
+  "browserslist": [
+    "> 1%"
+  ],
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
@@ -31,11 +46,18 @@
     "extract-text-webpack-plugin": "^3.0.1",
     "foreman": "^2.0.0",
     "html-webpack-plugin": "^2.30.1",
+    "husky": "^1.0.0-rc.8",
+    "lint-staged": "^7.1.2",
     "node-sass": "^4.5.3",
     "nodemon": "^1.17.2",
+    "postcss-loader": "^2.1.5",
     "redux-devtools-extension": "^2.13.2",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.19.0",
+    "stylelint": "^9.2.1",
+    "stylelint-config-recommended-scss": "^3.2.0",
+    "stylelint-order": "^0.8.1",
+    "stylelint-scss": "^3.1.0",
     "uglifyjs-webpack-plugin": "^1.0.0-beta.3",
     "webpack": "^3.8.1",
     "webpack-dev-server": "^2.9.3",
