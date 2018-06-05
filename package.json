@@ -9,7 +9,9 @@
     "build-server": "yarn run babel-server && yarn run babel-shared",
     "build-client": "BABEL_ENV=production webpack -p --config webpack.prod.js && rsync -r ./static/ ./dist/static/",
     "babel-server": "BABEL_ENV=production babel ./src/server --out-dir ./dist/server",
-    "babel-shared": "BABEL_ENV=production babel ./src/shared --out-dir ./dist/shared"
+    "babel-shared": "BABEL_ENV=production babel ./src/shared --out-dir ./dist/shared",
+    "prettier": "prettier --write ./**/*.{js,jsx,json,scss}",
+    "eslint": "eslint ./src/**/*.{js,jsx} --fix"
   },
   "husky": {
     "hooks": {
@@ -21,8 +23,16 @@
   "license": "MIT",
   "author": "Alex Zaworski",
   "lint-staged": {
-    "src/client/styles/**/*.scss": [
+    "*.scss": [
       "stylelint --fix",
+      "git add"
+    ],
+    "*.{js,jsx,scss,json}": [
+      "prettier --write",
+      "git add"
+    ],
+    "*.{js,jsx}": [
+      "eslint --fix",
       "git add"
     ]
   },
@@ -51,6 +61,7 @@
     "node-sass": "^4.5.3",
     "nodemon": "^1.17.2",
     "postcss-loader": "^2.1.5",
+    "prettier": "^1.13.4",
     "redux-devtools-extension": "^2.13.2",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.19.0",

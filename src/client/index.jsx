@@ -42,7 +42,10 @@ const getPreloadedState = () => {
 const store = createStore(
   reducers,
   getPreloadedState(),
-  compose(applyMiddleware(persistToLocalStorage), devToolsEnhancer())
+  compose(
+    applyMiddleware(persistToLocalStorage),
+    devToolsEnhancer()
+  )
 );
 
 // This timeout is to prevent a flash of unstyled content
