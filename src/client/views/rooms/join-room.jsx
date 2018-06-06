@@ -1,7 +1,7 @@
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, {Fragment} from 'react';
 
 import TextInput from '../../components/text-input';
 import errorMessageForCode from '../../util/error-message-for-code';
@@ -75,52 +75,57 @@ class CreateRoom extends React.PureComponent {
     const {formData, attemptedRoom} = this.state;
     const {userId, roomId, password} = formData;
     return (
-      <form onSubmit={this.handleSubmit}>
-        {!attemptedRoom && (
+      <Fragment>
+        <h3 className="subheader">
+          {attemptedRoom ? `Joining "${attemptedRoom}"` : 'Create room'}
+        </h3>
+        <form onSubmit={this.handleSubmit}>
+          {!attemptedRoom && (
+            <TextInput
+              id="roomId"
+              label="Room name"
+              inputProps={{
+                autoComplete: 'off',
+                type: 'text',
+                value: roomId,
+                required: true,
+                onChange: this.handleInput,
+              }}
+            />
+          )}
           <TextInput
-            id="roomId"
-            label="Room name"
+            id="userId"
+            label="Your display name"
+            error={this.messageForErrorCode(USER_EXISTS)}
             inputProps={{
               autoComplete: 'off',
               type: 'text',
-              value: roomId,
+              value: userId,
               required: true,
               onChange: this.handleInput,
             }}
           />
-        )}
-        <TextInput
-          id="userId"
-          label="Your display name"
-          error={this.messageForErrorCode(USER_EXISTS)}
-          inputProps={{
-            autoComplete: 'off',
-            type: 'text',
-            value: userId,
-            required: true,
-            onChange: this.handleInput,
-          }}
-        />
-        <TextInput
-          id="password"
-          label="Room password"
-          error={this.messageForErrorCode(INVALID_PASS)}
-          inputProps={{
-            autoComplete: 'off',
-            type: 'password',
-            value: password,
-            onChange: this.handleInput,
-          }}
-        />
-        <div className="button-group">
-          <Link to="/rooms" className="button button--secondary">
-            Cancel
-          </Link>
-          <button className="button button--primary">
-            {attemptedRoom ? 'Join' : 'Create'}
-          </button>
-        </div>
-      </form>
+          <TextInput
+            id="password"
+            label="Room password"
+            error={this.messageForErrorCode(INVALID_PASS)}
+            inputProps={{
+              autoComplete: 'off',
+              type: 'password',
+              value: password,
+              onChange: this.handleInput,
+            }}
+          />
+          <div className="button-group">
+            <Link to="/rooms" className="button button--secondary">
+              Cancel
+            </Link>
+            <button className="button button--primary">
+              {attemptedRoom ? 'Join' : 'Create'}
+            </button>
+          </div>
+        </form>
+      </Fragment>
     );
   }
 }

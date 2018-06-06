@@ -4,9 +4,11 @@ import PropTypes from 'prop-types';
 const TextInput = ({inputProps, label, error, id}) => {
   return (
     <div className="text-input-wrap">
-      <label className="text-input-label" htmlFor={id}>
-        {label}
-      </label>
+      {label && (
+        <label className="text-input-label" htmlFor={id}>
+          {label}
+        </label>
+      )}
       <input
         {...inputProps}
         id={id}

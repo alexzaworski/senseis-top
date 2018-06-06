@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import PropTypes from 'prop-types';
 import {Link, Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
@@ -42,26 +42,28 @@ class DefaultLife extends React.PureComponent {
     const {newDefaultLife, hasSaved} = this.state;
     if (hasSaved) return <Redirect to="/settings" />;
     return (
-      <form onSubmit={this.handleSubmit}>
-        <TextInput
-          id="defaultLife"
-          label="Default life total"
-          inputProps={{
-            autoComplete: 'off',
-            type: 'number',
-            required: true,
-            value: newDefaultLife,
-            onChange: this.handleChange,
-            pattern: '\\d*',
-          }}
-        />
-        <div className="button-group">
-          <Link to="/settings" replace className="button button--secondary">
-            Cancel
-          </Link>
-          <button className="button button--primary">Save</button>
-        </div>
-      </form>
+      <Fragment>
+        <h3 className="subheader">Default life total</h3>
+        <form onSubmit={this.handleSubmit}>
+          <TextInput
+            id="defaultLife"
+            inputProps={{
+              autoComplete: 'off',
+              type: 'number',
+              required: true,
+              value: newDefaultLife,
+              onChange: this.handleChange,
+              pattern: '\\d*',
+            }}
+          />
+          <div className="button-group">
+            <Link to="/settings" replace className="button button--secondary">
+              Cancel
+            </Link>
+            <button className="button button--primary">Save</button>
+          </div>
+        </form>
+      </Fragment>
     );
   }
 }
