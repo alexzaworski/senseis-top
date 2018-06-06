@@ -8,6 +8,10 @@
     flex-direction: row;
     padding: 12px 4px;
   }
+
+  &--animating {
+    animation: transition-header-in 0.2s forwards cubic-bezier(0, 0, 0.2, 1);
+  }
 }
 
 .header__title {
@@ -49,4 +53,10 @@
 .header__back-link__icon {
   fill: $light-blue;
   margin-right: 2px;
+}
+
+@keyframes transition-header-in {
+  100% {
+    transform: translate(0);
+  }
 }

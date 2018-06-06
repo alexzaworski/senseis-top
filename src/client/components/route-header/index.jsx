@@ -22,12 +22,16 @@ class RouteHeader extends React.Component {
             <HeaderTransitioner
               heightKey={isExact ? 'route-header' : 'route-header-collapsed'}
             >
-              {({headerRef, headerStyle}) => {
+              {({headerRef, headerStyle, modifierClasses}) => {
                 return (
                   <header
                     ref={headerRef}
                     style={headerStyle}
-                    className={['header', !isExact && 'header--collapsed']
+                    className={[
+                      'header',
+                      !isExact && 'header--collapsed',
+                      ...modifierClasses.map(mod => `header--${mod}`),
+                    ]
                       .filter(Boolean)
                       .join(' ')}
                   >

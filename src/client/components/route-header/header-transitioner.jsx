@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Motion, spring} from 'react-motion';
 
 class HeaderTransitioner extends React.PureComponent {
   static propTypes = {
@@ -18,6 +17,12 @@ class HeaderTransitioner extends React.PureComponent {
     this.setState({
       maxHeight: this.measureHeaderHeight(),
     });
+
+    this.header.addEventListener('animationend', () => {
+      this.setState({
+        isAnimating: false,
+      });
+    });
   }
 
   componentDidUpdate(prevProps) {
@@ -31,6 +36,7 @@ class HeaderTransitioner extends React.PureComponent {
     const height = this.measureHeaderHeight();
     heightCache[heightKey] = height;
     const diff = heightCache[prevKey] - heightCache[heightKey];
+
     this.setState({
       diff,
       elOffset: Math.min(diff * -1, 0),
@@ -59,32 +65,20 @@ class HeaderTransitioner extends React.PureComponent {
 
   render() {
     const {diff, maxHeight, isAnimating, elOffset} = this.state;
-    return (
-      <Motion
-        key={this.props.heightKey}
-        defaultStyle={{translate: 0}}
-        style={{
-          translate: diff ? spring(diff, {stiffness: 400, damping: 35}) : 0,
-        }}
-        onRest={() => {
-          this.setState({isAnimating: false});
-        }}
-      >
-        {({translate}) => {
-          return this.props.children({
-            headerRef: this.headerRef,
-            headerStyle: isAnimating
-              ? {
-                  willChange: 'transform',
-                  transform: `translateY(${diff - translate}px)`,
-                  height: maxHeight || 'auto',
-                  marginTop: elOffset,
-                }
-              : null,
-          });
-        }}
-      </Motion>
-    );
+    return this.props.children({
+      headerRef: this.headerRef,
+      modifierClasses: isAnimating ? ['animating'] : [],
+      headerStyle: isAnimating
+        ? {
+            willChange: 'transform',
+            transform: `translateY(${diff}px)`,
+            height: maxHeight || 'auto',
+            marginTop: elOffset,
+          }
+        : {
+            willChange: 'transform',
+          },
+    });
   }
 }
 
