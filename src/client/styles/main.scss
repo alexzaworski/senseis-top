@@ -82,9 +82,7 @@ a {
   -webkit-overflow-scrolling: touch;
   padding: 16px;
 
-  &--centered {
-    align-items: center;
+  &--flex {
     display: flex;
-    justify-content: center;
   }
 }

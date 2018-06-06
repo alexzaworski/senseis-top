@@ -1,12 +1,12 @@
 .life-total {
-  flex-grow: 1;
-  margin-bottom: 15%;
+  margin: auto;
   text-align: center;
 }
 
 .life-total__number {
   font-size: 10em;
   font-weight: bold;
+  line-height: 1;
   margin-bottom: 0.5rem;
 }
 

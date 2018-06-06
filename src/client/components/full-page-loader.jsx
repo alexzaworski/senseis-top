@@ -6,7 +6,7 @@ class FullPageLoader extends React.PureComponent {
   render() {
     return (
       <Fragment>
-        <main className="view-main view-main--centered">
+        <main className="view-main view-main--flex">
           <Loader />
         </main>
       </Fragment>

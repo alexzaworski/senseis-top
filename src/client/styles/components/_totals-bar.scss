@@ -1,5 +1,6 @@
 .totals-bar {
   display: flex;
+  flex-shrink: 0;
 }
 
 .totals-bar__user {

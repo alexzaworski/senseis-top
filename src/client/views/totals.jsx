@@ -72,7 +72,7 @@ class Totals extends React.PureComponent {
     return (
       <Fragment>
         {otherUsers.length > 0 && <TotalsBar users={otherUsers} />}
-        <main className="view-main view-main--centered">
+        <main className="view-main view-main--flex">
           <div className="life-total">
             <div className="life-total__number">{life}</div>
             <div className="life-total__controls">
