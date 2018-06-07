@@ -1,6 +1,4 @@
-import wsSend from './ws-send';
 import * as errorCodes from '../shared/error-codes';
-
 import {
   JOIN_ROOM_REQUEST,
   LIST_ROOMS_REQUEST,
@@ -9,6 +7,7 @@ import {
   WS_ERROR,
 } from '../shared/action-types';
 
+import wsSend from './ws-send';
 import joinRoom from './message-handlers/join-room';
 import leaveRoom from './message-handlers/leave-room';
 import listRooms from './message-handlers/list-rooms';

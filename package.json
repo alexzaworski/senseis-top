@@ -3,15 +3,15 @@
     "start": "nf start",
     "clean": "rm -rf ./dist && mkdir ./dist",
     "build": "yarn run clean && yarn run build-server && yarn run build-client",
-    "stylelint": "stylelint **/*.scss --fix",
+    "stylelint": "stylelint '**/*.scss' --fix",
     "start-server": "nodemon --watch ./src/server --watch ./src/shared --exec \" node src/server/\"",
     "start-client": "webpack-dev-server --config webpack.dev.js",
     "build-server": "yarn run babel-server && yarn run babel-shared",
     "build-client": "BABEL_ENV=production webpack -p --config webpack.prod.js && rsync -r ./static/ ./dist/static/",
     "babel-server": "BABEL_ENV=production babel ./src/server --out-dir ./dist/server",
     "babel-shared": "BABEL_ENV=production babel ./src/shared --out-dir ./dist/shared",
-    "prettier": "prettier --write **/*.{js,jsx,json,scss}",
-    "eslint": "eslint **/*.{js,jsx} --fix"
+    "prettier": "prettier --write '**/*.{js,jsx,json,scss}'",
+    "eslint": "eslint --fix '**/*.{js,jsx}'"
   },
   "husky": {
     "hooks": {

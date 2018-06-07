@@ -1,10 +1,9 @@
 import {UPDATE_USERS} from '../../../shared/action-types';
-
 import {getRoom} from '../../rooms/room-cache';
 import {getUserData} from '../../user-helpers';
+import wsSend from '../../ws-send';
 
 import broadcastRoomList from './broadcast-room-list';
-import wsSend from '../../ws-send';
 
 const exitRoom = ({data}) => {
   const {userId, roomId, password} = data;

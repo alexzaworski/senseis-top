@@ -1,8 +1,6 @@
 import {UPDATE_USERS} from '../../shared/action-types';
-
 import {getRoom} from '../rooms/room-cache';
 import {getUserData} from '../user-helpers';
-
 import wsSend from '../ws-send';
 
 const setLifeHandler = ({data}) => {

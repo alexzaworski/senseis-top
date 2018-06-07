@@ -1,8 +1,6 @@
 import {JOIN_ROOM_SUCCESS, UPDATE_USERS} from '../../shared/action-types';
-
 import {createRoom, getRoom} from '../rooms/room-cache';
 import {getUserData} from '../user-helpers';
-
 import wsSend from '../ws-send';
 
 import broadcastRoomList from './shared/broadcast-room-list';

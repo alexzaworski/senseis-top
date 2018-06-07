@@ -5,7 +5,6 @@ import {
   CONNECTION_OPENED,
   CONNECTION_LOST,
 } from '../../shared/action-types';
-
 import errorMessageForCode from '../util/error-message-for-code';
 import {ROOM_FULL} from '../../shared/error-codes';
 
