@@ -41,7 +41,7 @@ class Rooms extends React.PureComponent {
             return (
               <div className="header__title-wrap">
                 <h2 className="header__title">Rooms</h2>
-                <Link to="/rooms/join" className="button">
+                <Link to="/rooms/join" replace className="button">
                   Create
                 </Link>
               </div>
