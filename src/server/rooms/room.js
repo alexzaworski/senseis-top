@@ -7,7 +7,7 @@ import {
   INVALID_LIFE,
 } from '../../shared/error-codes';
 import {isUser, isNotUser} from '../user-helpers';
-import {maxRoomSize} from '../../shared/config';
+import {MAX_ROOM_SIZE} from '../../shared/config';
 
 const USER_TIMEOUT = 1800000; //30m
 
@@ -41,7 +41,7 @@ class Room {
     if (String(userId).length === 0) throw MISSING_USER_ID;
     if (isNaN(life)) throw INVALID_LIFE;
     if (_users.some(u => u.userId === userId)) throw USER_EXISTS;
-    if (_users.length === maxRoomSize) throw ROOM_FULL;
+    if (_users.length === MAX_ROOM_SIZE) throw ROOM_FULL;
 
     const newUser = {userId, life, ws, idleCallback};
     this._resetIdleTimeout(newUser);

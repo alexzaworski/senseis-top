@@ -1,1 +1,1 @@
-export const maxRoomSize = 5;
+export const MAX_ROOM_SIZE = 5;

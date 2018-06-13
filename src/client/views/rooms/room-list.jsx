@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 
 import {SET_ATTEMPTED_ROOM} from '../../../shared/action-types';
 import Icon from '../../components/icon/';
-import {maxRoomSize} from '../../../shared/config';
+import {MAX_ROOM_SIZE} from '../../../shared/config';
 
 class Rooms extends React.PureComponent {
   static propTypes = {
@@ -30,7 +30,7 @@ class Rooms extends React.PureComponent {
                   <Icon symbol="lock" className="underlined-list__icon" />
                 )}
                 <div className="underlined-list__secondary">
-                  {userCount}/{maxRoomSize}
+                  {userCount}/{MAX_ROOM_SIZE}
                 </div>
               </li>
             );
