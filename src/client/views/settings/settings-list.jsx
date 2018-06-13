@@ -12,13 +12,23 @@ class SettingsList extends React.PureComponent {
     const {
       settings: {defaultLife},
     } = this.props;
+
     return (
       <ul className="underlined-list">
         <li className="underlined-list__item">
           <Link
+            to="/settings/help"
+            replace
+            className="underlined-list__item-wrap util-inherit-color"
+          >
+            Help
+          </Link>
+        </li>
+        <li className="underlined-list__item">
+          <Link
             to="/settings/default-total"
             replace
-            className="underlined-list__item-wrap"
+            className="underlined-list__item-wrap util-inherit-color"
           >
             <div className="underlined-list__primary">Default life total</div>
             <div className="underlined-list__secondary">{defaultLife}</div>

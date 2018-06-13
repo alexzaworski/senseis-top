@@ -1,5 +1,7 @@
 @import './vars/colors';
 
+@import './utils';
+
 @import './components/tab-bar';
 @import './components/header';
 @import './components/button';
@@ -54,8 +56,13 @@ h3 {
 }
 
 a {
-  color: white;
+  color: $light-blue;
   text-decoration: none;
+}
+
+p {
+  line-height: 1.5;
+  margin: 0 0 16px;
 }
 
 .app-root {
