@@ -24,10 +24,12 @@ class CreateRoom extends React.PureComponent {
     life: PropTypes.number,
     userId: PropTypes.string,
     currentError: PropTypes.string,
+    hidePasswordInput: PropTypes.bool,
   };
 
   state = {
     attemptedRoom: this.props.attemptedRoom,
+    hidePasswordInput: this.props.hidePasswordInput,
     formData: {
       userId: this.props.userId || '',
       roomId: this.props.attemptedRoom || '',
@@ -72,7 +74,7 @@ class CreateRoom extends React.PureComponent {
   };
 
   render() {
-    const {formData, attemptedRoom} = this.state;
+    const {formData, attemptedRoom, hidePasswordInput} = this.state;
     const {userId, roomId, password} = formData;
     return (
       <Fragment>
@@ -105,17 +107,19 @@ class CreateRoom extends React.PureComponent {
               onChange: this.handleInput,
             }}
           />
-          <TextInput
-            id="password"
-            label="Room password"
-            error={this.messageForErrorCode(INVALID_PASS)}
-            inputProps={{
-              autoComplete: 'off',
-              type: 'password',
-              value: password,
-              onChange: this.handleInput,
-            }}
-          />
+          {!hidePasswordInput && (
+            <TextInput
+              id="password"
+              label="Room password"
+              error={this.messageForErrorCode(INVALID_PASS)}
+              inputProps={{
+                autoComplete: 'off',
+                type: 'password',
+                value: password,
+                onChange: this.handleInput,
+              }}
+            />
+          )}
           <div className="button-group">
             <Link to="/rooms" className="button button--secondary">
               Cancel
@@ -135,10 +139,20 @@ const mapStateToProps = state => {
     attemptedRoom,
     self: {life, userId},
     errors: {joinRoom: currentError},
+    rooms,
   } = state;
+
+  const foundRoom =
+    attemptedRoom &&
+    rooms.find(room => {
+      return room.roomId === attemptedRoom;
+    });
+
+  const hidePasswordInput = foundRoom && foundRoom.isPrivate === false;
 
   return {
     attemptedRoom,
+    hidePasswordInput,
     life,
     userId,
     currentError,
