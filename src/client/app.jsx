@@ -50,7 +50,7 @@ class App extends React.PureComponent {
 
   componentDidMount() {
     const noSleep = new NoSleep();
-    document.addEventListener('touchend', () => noSleep.enable());
+    document.addEventListener('touchend', () => noSleep.enable(), {once: true});
     const {storedSettings, initSettings} = this.props;
     storedSettings && initSettings(storedSettings);
     this.connect();
