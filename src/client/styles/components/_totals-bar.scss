@@ -24,7 +24,10 @@ $bar-colors: ($red, $green, $light-blue, $light-purple);
   overflow: hidden;
   text-overflow: ellipsis;
   @for $i from 1 through length($bar-colors) {
-    .totals-bar__user:nth-of-type(#{$i}n) & {
+    // can't use nth-of-type with the sort component
+    // we're using so we're manually setting classes
+    // and using those instead
+    .totals-bar__user--pos-#{$i - 1} & {
       border-color: nth($bar-colors, $i);
     }
   }

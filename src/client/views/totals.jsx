@@ -16,7 +16,6 @@ class Totals extends React.PureComponent {
   static propTypes = {
     self: PropTypes.object,
     activeRoom: PropTypes.object,
-    otherUsers: PropTypes.array,
     incrementLife: PropTypes.func,
     decrementLife: PropTypes.func,
     defaultLife: PropTypes.number,
@@ -67,11 +66,10 @@ class Totals extends React.PureComponent {
   render() {
     const {
       self: {life},
-      otherUsers,
     } = this.props;
     return (
       <Fragment>
-        {otherUsers.length > 0 && <TotalsBar users={otherUsers} />}
+        <TotalsBar />
         <main className="view-main view-main--flex">
           <div className="life-total">
             <div className="life-total__number">{life}</div>
@@ -112,13 +110,11 @@ const mapStateToProps = state => {
   const {
     self,
     activeRoom,
-    otherUsers,
     settings: {defaultLife},
   } = state;
   return {
     self,
     activeRoom,
-    otherUsers,
     defaultLife,
   };
 };

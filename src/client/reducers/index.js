@@ -11,6 +11,7 @@ import createErrorReducer from './create-error-reducer';
 import toast from './toast';
 import socketConnected from './socket-connected';
 import settings from './settings';
+import userSortOrder from './user-sort-order';
 
 const noop = state => state || null;
 
@@ -23,6 +24,7 @@ const reducers = combineReducers({
   toast,
   socketConnected,
   settings,
+  userSortOrder,
   storedRoom: noop,
   storedSettings: noop,
   errors: combineReducers({
