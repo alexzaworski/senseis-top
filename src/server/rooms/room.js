@@ -9,7 +9,7 @@ import {
 import {isUser, isNotUser} from '../user-helpers';
 import {MAX_ROOM_SIZE} from '../../shared/config';
 
-const USER_TIMEOUT = 1800000; //30m
+const USER_TIMEOUT = 14400000; //4h
 
 class Room {
   constructor({roomId, password, userId, life, ws, idleCallback, onEmpty}) {
