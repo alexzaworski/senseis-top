@@ -12,21 +12,17 @@ class PointerHandler extends React.PureComponent {
   };
 
   componentDidMount() {
-    if (this.props.onPointerDown) {
+    const {onPointerDown} = this.props;
+    if (onPointerDown) {
       downEvents.forEach(pointerDown => {
         this.eventTarget.addEventListener(pointerDown, this.handlePointerDown);
-      });
-    }
-
-    if (this.props.onPointerUp) {
-      upEvents.forEach(pointerUp => {
-        this.eventTarget.addEventListener(pointerUp, this.handlePointerUp);
       });
     }
   }
 
   componentWillUnmount() {
-    if (this.props.onPointerDown) {
+    const {onPointerDown, onPointerUp} = this.props;
+    if (onPointerDown) {
       downEvents.forEach(pointerDown => {
         this.eventTarget.removeEventListener(
           pointerDown,
@@ -35,16 +31,25 @@ class PointerHandler extends React.PureComponent {
       });
     }
 
-    if (this.props.onPointerUp) {
+    if (onPointerUp) {
       upEvents.forEach(pointerUp => {
-        this.eventTarget.removeEventListener(pointerUp, this.handlePointerUp);
+        document.removeEventListener(pointerUp, this.handlePointerUp);
       });
     }
   }
 
   handlePointerDown = event => {
     event.preventDefault();
-    this.props.onPointerDown(event);
+    const {onPointerDown, onPointerUp} = this.props;
+    onPointerDown(event);
+
+    if (!onPointerUp) return;
+
+    upEvents.forEach(pointerUp => {
+      document.addEventListener(pointerUp, this.handlePointerUp, {
+        once: true,
+      });
+    });
   };
 
   handlePointerUp = event => {
