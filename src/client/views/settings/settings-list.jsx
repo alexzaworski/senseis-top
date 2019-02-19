@@ -10,7 +10,7 @@ class SettingsList extends React.PureComponent {
 
   render() {
     const {
-      settings: {defaultLife},
+      settings: {defaultLife, observerMode},
     } = this.props;
 
     return (
@@ -32,6 +32,18 @@ class SettingsList extends React.PureComponent {
           >
             <div className="underlined-list__primary">Default life total</div>
             <div className="underlined-list__secondary">{defaultLife}</div>
+          </Link>
+        </li>
+        <li className="underlined-list__item">
+          <Link
+            to="/settings/observer-mode"
+            replace
+            className="underlined-list__item-wrap util-inherit-color"
+          >
+            <div className="underlined-list__primary">Observer Mode</div>
+            <div className="underlined-list__secondary">
+              {observerMode ? 'ON' : 'OFF'}
+            </div>
           </Link>
         </li>
       </ul>
