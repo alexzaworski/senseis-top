@@ -43,7 +43,7 @@ class Totals extends React.PureComponent {
   createPointerDownHandler = lifeTotalFn => {
     return () => {
       lifeTotalFn();
-      clearTimeout(this.pointerDownTimeout);
+      this.clearTimeouts();
       this.pointerDownTimeout = setTimeout(() => {
         this.interval = setInterval(lifeTotalFn, 48);
       }, 500);
