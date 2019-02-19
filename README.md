@@ -46,7 +46,7 @@ PROD_SERVER=user@hostname
 
 ### Debug utilities
 
-If you set `DEBUG_ENV=true` in your `.env` file, the server will auto-generate a room with 4 users in it that you can connect to.
+If you set `DEBUG_ENV=true` in your `.env` file, the server will auto-generate a room with 4 users in it that you can connect to. You can set a password via `DEBUG_ENV_PASSWORD`.
 
 ### Building/deploying the app
 

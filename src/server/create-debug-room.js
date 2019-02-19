@@ -4,11 +4,12 @@ import joinRoom from './message-handlers/join-room';
 import setLife from './message-handlers/set-life';
 
 const ROOM_ID = 'Debug';
-const PASS = '';
+
+const {WS_HOST_DEV, DEBUG_ROOM_PASSWORD = ''} = process.env;
 
 const createDebugRoom = () => {
   [...new Array(4)].map((_, index) => {
-    const ws = new WebSocket(process.env.WS_HOST_DEV);
+    const ws = new WebSocket(WS_HOST_DEV);
     const userId = `Debug ${index}`;
     let life = 5 ** index;
     joinRoom({
@@ -16,7 +17,7 @@ const createDebugRoom = () => {
       data: {
         roomId: ROOM_ID,
         userId,
-        password: PASS,
+        password: DEBUG_ROOM_PASSWORD,
         life,
         idleCallback: () => 1,
       },
@@ -29,7 +30,7 @@ const createDebugRoom = () => {
       setLife({
         ws,
         data: {
-          password: PASS,
+          password: DEBUG_ROOM_PASSWORD,
           roomId: ROOM_ID,
           userId,
           life,
