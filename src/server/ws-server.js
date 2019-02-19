@@ -2,8 +2,11 @@ import WebSocket from 'ws';
 
 import {cacheSocket} from './socket-cache';
 import handleMessage from './handle-message';
+import createDebugRoom from './create-debug-room';
 
-const wss = new WebSocket.Server({port: process.env.WS_PORT});
+const {WS_PORT, NODE_ENV, DEBUG_ROOM} = process.env;
+
+const wss = new WebSocket.Server({port: WS_PORT});
 
 wss.on('connection', ws => {
   cacheSocket(ws);
@@ -16,3 +19,7 @@ wss.on('connection', ws => {
     }
   });
 });
+
+if (NODE_ENV !== 'production' && DEBUG_ROOM) {
+  createDebugRoom();
+}

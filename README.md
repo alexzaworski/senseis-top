@@ -44,6 +44,10 @@ PROD_SERVER=user@hostname
 
 `yarn run start` should spin up a webpack dev server to serve static content and handle hot reloading as well as a websocket server. For testing purposes, it is often useful to set `WS_HOST_DEV` to a local IP rather than `localhost` so you can access it on mobile devices within your network.
 
+### Debug utilities
+
+If you set `DEBUG_ENV=true` in your `.env` file, the server will auto-generate a room with 4 users in it that you can connect to.
+
 ### Building/deploying the app
 
 `yarn run build` will create a `dist/` directory that has all client and server files built for production environments. Running `deply.sh` will execute `yarn run build`, as well as installing the app wherever you have configured in `.env`.
