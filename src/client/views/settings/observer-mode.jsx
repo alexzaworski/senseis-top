@@ -35,6 +35,9 @@ class ObserverMode extends React.PureComponent {
           If all other users leave the room you are observing, you will be
           removed automatically.
         </p>
+        <p className="notice">
+          Heads up: this is still pretty experimental, use at your own risk
+        </p>
         <Toggle
           label="Enable observer mode"
           inputProps={{checked: observerMode, onChange: this.handleChange}}
