@@ -1,6 +1,5 @@
 import {UPDATE_USERS} from '../../../shared/action-types';
 import {getRoom} from '../../rooms/room-cache';
-import {getUserData} from '../../user-helpers';
 import wsSend from '../../ws-send';
 
 import broadcastRoomList from './broadcast-room-list';
@@ -12,14 +11,15 @@ const exitRoom = ({data}) => {
   if (!room) return;
 
   room.removeUser(userId);
-  const hasRemainingUsers = room.users().length > 0;
+  const hasRemainingUsers = room.userCount() > 0;
   broadcastRoomList();
 
   if (hasRemainingUsers) {
-    room.users().forEach(user => {
-      wsSend(user.ws, {
+    room.allMembers().forEach(member => {
+      const {ws, userId} = member;
+      wsSend(ws, {
         type: UPDATE_USERS,
-        users: room.usersExcept(user.userId).map(getUserData),
+        users: room.usersExcept(userId),
       });
     });
   }

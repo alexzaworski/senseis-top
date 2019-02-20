@@ -16,23 +16,13 @@ export const getRoom = ({roomId, password, strict = false}) => {
   return room;
 };
 
-export const createRoom = ({
-  roomId,
-  password,
-  userId,
-  life,
-  ws,
-  idleCallback,
-}) => {
+export const createRoom = ({roomId, password, creator}) => {
   if (String(roomId).length === 0) throw MISSING_ROOM_ID;
   console.info(`Creating room "${roomId}"`);
   const room = new Room({
     roomId,
     password,
-    life,
-    ws,
-    userId,
-    idleCallback,
+    creator,
     onEmpty: () => {
       delete roomCache[roomId];
       console.info(`Closed room "${roomId}"`);
@@ -48,7 +38,7 @@ export const listRooms = () => {
     const room = roomCache[roomId];
     return {
       roomId,
-      userCount: room.users().length,
+      userCount: room.userCount(),
       isPrivate: String(room.password).length > 0,
     };
   });
