@@ -96,7 +96,11 @@ class Totals extends React.PureComponent {
               </PointerHandler>
             </div>
 
-            <button onClick={this.resetLife} className="button button--plain">
+            <button
+              onClick={this.resetLife}
+              className="button button--plain"
+              aria-label="Reset Life"
+            >
               <Icon symbol="reset" className="life-total__reset" />
             </button>
           </div>
