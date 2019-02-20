@@ -8,26 +8,28 @@ import {
 } from '../../shared/error-codes';
 import {isUser, isNotUser} from '../user-helpers';
 import {MAX_ROOM_SIZE} from '../../shared/config';
+import {getUserData} from '../user-helpers';
 
 const USER_TIMEOUT = 14400000; //4h
 
 class Room {
-  constructor({roomId, password, userId, life, ws, idleCallback, onEmpty}) {
+  constructor({roomId, password, creator, onEmpty}) {
     if (String(roomId).length === 0) throw MISSING_ROOM_ID;
     this._users = [];
+    this._observers = [];
     this._timeouts = {};
     this.roomId = roomId;
     this.password = password;
     this.onEmpty = onEmpty;
-    this.addUser({userId, life, ws, idleCallback});
+    this.addUser(creator);
   }
 
   _resetIdleTimeout(user) {
-    const {userId, idleCallback} = user;
+    const {userId, removeUser} = user;
     this._clearIdleTimeout(userId);
     this._timeouts[userId] = setTimeout(() => {
       console.info(`Booting inactive user from "${this.roomId}"`);
-      idleCallback();
+      removeUser();
     }, USER_TIMEOUT);
   }
 
@@ -35,20 +37,42 @@ class Room {
     clearTimeout(this._timeouts[userId]);
   };
 
-  addUser({userId, life, ws, idleCallback}) {
-    const {_users} = this;
-
+  addUser({userId, life, ws, observerMode, removeUser}) {
     if (String(userId).length === 0) throw MISSING_USER_ID;
-    if (isNaN(life)) throw INVALID_LIFE;
-    if (_users.some(u => u.userId === userId)) throw USER_EXISTS;
-    if (_users.length === MAX_ROOM_SIZE) throw ROOM_FULL;
+    if (this.allMembers().some(u => u.userId === userId)) throw USER_EXISTS;
 
-    const newUser = {userId, life, ws, idleCallback};
+    if (observerMode) return this.handlerObserver({userId, ws, removeUser});
+
+    if (isNaN(life)) throw INVALID_LIFE;
+    if (this.userCount() === MAX_ROOM_SIZE) throw ROOM_FULL;
+
+    const newUser = {userId, life, ws, removeUser};
     this._resetIdleTimeout(newUser);
-    this._users = _users.concat(newUser);
+    this._users = [...this._users, newUser];
+    this._logAdded();
+  }
+
+  _logAdded() {
+    const {_users, _observers} = this;
+    const {length: uCount} = _users;
+    const {length: oCount} = _observers;
     console.info(
-      `Added user to "${this.roomId}", count: ${this._users.length}`
+      `Added member to "${this.roomId}" (users: ${uCount} | obs: ${oCount})`
     );
+  }
+
+  _logRemoved() {
+    const {_users, _observers} = this;
+    const {length: uCount} = _users;
+    const {length: oCount} = _observers;
+    console.info(
+      `Removed member from "${this.roomId}" (users: ${uCount} | obs: ${oCount})`
+    );
+  }
+
+  handlerObserver(newObserver) {
+    this._observers = [...this._observers, newObserver];
+    this._logAdded();
   }
 
   updateUser({userId, life}) {
@@ -60,21 +84,31 @@ class Room {
     user.life = parseInt(life);
   }
 
-  users() {
-    return this._users;
+  userCount() {
+    return this._users.length;
   }
 
   usersExcept(userId) {
-    return this._users.filter(isNotUser(userId));
+    return this._users.filter(isNotUser(userId)).map(getUserData);
+  }
+
+  allMembers() {
+    return [...this._users, ...this._observers];
+  }
+
+  allMembersExcept(userId) {
+    return [...this._users, ...this._observers].filter(isNotUser(userId));
   }
 
   removeUser(userId) {
     this._users = this._users.filter(isNotUser(userId));
+    this._observers = this._observers.filter(isNotUser(userId));
     this._clearIdleTimeout(userId);
-    console.info(
-      `Removed user from "${this.roomId}", count: ${this._users.length}`
-    );
-    if (this._users.length === 0) this.onEmpty();
+    this._logRemoved();
+    if (this._users.length === 0) {
+      this._observers.forEach(obs => obs.removeUser());
+      this.onEmpty();
+    }
   }
 }
 

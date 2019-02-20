@@ -19,7 +19,7 @@ const createDebugRoom = () => {
         userId,
         password: DEBUG_ROOM_PASSWORD,
         life,
-        idleCallback: () => 1,
+        removeUser: () => 1,
       },
     });
     let next = 1;
