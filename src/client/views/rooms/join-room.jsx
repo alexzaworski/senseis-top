@@ -2,6 +2,7 @@ import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import React, {Fragment} from 'react';
+import {Redirect} from 'react-router';
 
 import TextInput from '../../components/text-input';
 import errorMessageForCode from '../../util/error-message-for-code';
@@ -25,6 +26,7 @@ class CreateRoom extends React.PureComponent {
     userId: PropTypes.string,
     currentError: PropTypes.string,
     hidePasswordInput: PropTypes.bool,
+    observerMode: PropTypes.bool,
   };
 
   state = {
@@ -64,8 +66,13 @@ class CreateRoom extends React.PureComponent {
   handleSubmit = event => {
     event.preventDefault();
     const {formData} = this.state;
-    const {life} = this.props;
-    this.context.wsSend({type: JOIN_ROOM_REQUEST, life, ...formData});
+    const {life, observerMode} = this.props;
+    this.context.wsSend({
+      type: JOIN_ROOM_REQUEST,
+      life,
+      observerMode,
+      ...formData,
+    });
   };
 
   messageForErrorCode = code => {
@@ -74,13 +81,26 @@ class CreateRoom extends React.PureComponent {
   };
 
   render() {
+    const {observerMode} = this.props;
     const {formData, attemptedRoom, hidePasswordInput} = this.state;
     const {userId, roomId, password} = formData;
+
+    if (observerMode && !attemptedRoom) {
+      return <Redirect to="/rooms" />;
+    }
+
     return (
       <Fragment>
         <h3 className="subheader">
           {attemptedRoom ? `Joining "${attemptedRoom}"` : 'Create room'}
         </h3>
+        {observerMode && (
+          <p className="notice">
+            You are joining as an observer. If all other players exit the room
+            you will be disconnected. Go to <Link to="/settings">settings</Link>{' '}
+            to change this behavior.
+          </p>
+        )}
         <form onSubmit={this.handleSubmit}>
           {!attemptedRoom && (
             <TextInput
@@ -139,6 +159,7 @@ const mapStateToProps = state => {
     attemptedRoom,
     self: {life, userId},
     errors: {joinRoom: currentError},
+    settings: {observerMode},
     rooms,
   } = state;
 
@@ -156,6 +177,7 @@ const mapStateToProps = state => {
     life,
     userId,
     currentError,
+    observerMode,
   };
 };
 

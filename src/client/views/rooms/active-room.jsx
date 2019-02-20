@@ -87,13 +87,14 @@ const mapStateToProps = state => {
     activeRoom: {roomId, password},
     self,
     otherUsers,
+    settings: {observerMode},
   } = state;
   return {
     roomId,
     password,
     isPrivate: Boolean(password),
     self,
-    users: [self, ...otherUsers],
+    users: [observerMode ? [] : self].concat(otherUsers),
   };
 };
 

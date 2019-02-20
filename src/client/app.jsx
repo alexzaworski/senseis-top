@@ -76,6 +76,7 @@ class App extends React.PureComponent {
       connectionLost,
       connectionOpened,
       socketConnected,
+      storedSettings: {observerMode},
     } = this.props;
     const socket = new WebSocket(wsHost);
     socket.onmessage = m => this.handleMessage(JSON.parse(m.data));
@@ -92,10 +93,15 @@ class App extends React.PureComponent {
       this.wsSend({type: LIST_ROOMS_REQUEST});
       const roomToJoin = activeRoom || storedRoom;
       if (roomToJoin) {
-        // joining aroom actually triggers LIST_ROOMS_SUCCESS by itself,
+        // joining a room actually triggers LIST_ROOMS_SUCCESS by itself,
         // but we want to dispatch it above regardless in case this
         // errors out.
-        this.wsSend({type: JOIN_ROOM_REQUEST, ...roomToJoin, ...self});
+        this.wsSend({
+          type: JOIN_ROOM_REQUEST,
+          ...roomToJoin,
+          ...self,
+          observerMode,
+        });
       }
     };
   };
