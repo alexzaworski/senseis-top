@@ -15,12 +15,13 @@ class Rooms extends React.PureComponent {
     activeRoom: PropTypes.object,
     attemptedRoom: PropTypes.string,
     rooms: PropTypes.array,
+    socketConnected: PropTypes.bool,
   };
 
   render() {
-    const {activeRoom, attemptedRoom, rooms} = this.props;
+    const {activeRoom, attemptedRoom, rooms, socketConnected} = this.props;
 
-    if (!rooms) return <FullPageLoader />;
+    if (!rooms || !socketConnected) return <FullPageLoader />;
 
     if (activeRoom) {
       return (
@@ -62,11 +63,12 @@ class Rooms extends React.PureComponent {
 }
 
 const mapStateToProps = state => {
-  const {rooms, activeRoom, attemptedRoom} = state;
+  const {rooms, activeRoom, attemptedRoom, socketConnected} = state;
   return {
     rooms,
     activeRoom,
     attemptedRoom,
+    socketConnected,
   };
 };
 
