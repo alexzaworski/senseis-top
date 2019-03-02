@@ -1,0 +1,55 @@
+.observer-totals {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 16px;
+  height: 100%;
+}
+
+.observer-totals__user {
+  background: linear-gradient(
+    to bottom,
+    rgba($white, 0.02),
+    rgba($white, 0.01)
+  );
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 0 0 0.25px rgba($white, 0.2),
+    0 4px 8px -4px darken($dark-purple, 5%);
+  overflow: hidden;
+  cursor: pointer;
+  height: 100%;
+}
+
+.observer-totals__user-id {
+  text-transform: uppercase;
+  line-height: 2;
+  text-align: center;
+  font-weight: bold;
+  color: rgba(#fff, 0.65);
+  padding: 8px 16px;
+  border-bottom: 2px solid;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  @for $i from 1 through length($bar-colors) {
+    // can't use nth-of-type with the sort component
+    // we're using so we're manually setting classes
+    // and using those instead
+    .observer-totals__user:nth-of-type(#{$i}) & {
+      border-color: nth($bar-colors, $i);
+    }
+  }
+}
+
+.observer-totals__user-life {
+  font-size: 4em;
+  font-weight: bold;
+  line-height: 1;
+  margin: auto;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  text-align: center;
+}

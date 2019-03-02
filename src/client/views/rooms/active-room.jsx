@@ -94,7 +94,7 @@ const mapStateToProps = state => {
     password,
     isPrivate: Boolean(password),
     self,
-    users: [observerMode ? [] : self].concat(otherUsers),
+    users: observerMode ? otherUsers : [self, ...otherUsers],
   };
 };
 

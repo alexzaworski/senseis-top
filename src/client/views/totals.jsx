@@ -2,15 +2,15 @@ import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import React, {Fragment} from 'react';
 
-import TotalsBar from '../components/totals-bar';
-import PointerHandler from '../components/pointer-down-handler';
-import Icon from '../components/icon';
 import {
   INCREMENT_LIFE,
   DECREMENT_LIFE,
   SET_LIFE_REQUEST,
   RESET_LIFE,
 } from '../../shared/action-types';
+import TotalsBar from '../components/totals-bar';
+import PointerHandler from '../components/pointer-down-handler';
+import Icon from '../components/icon';
 
 class Totals extends React.PureComponent {
   static propTypes = {
@@ -67,6 +67,7 @@ class Totals extends React.PureComponent {
     const {
       self: {life},
     } = this.props;
+
     return (
       <Fragment>
         <TotalsBar />

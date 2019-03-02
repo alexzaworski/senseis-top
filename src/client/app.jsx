@@ -19,6 +19,7 @@ import {
 } from '../shared/action-types';
 
 import Totals from './views/totals';
+import ObserverTotals from './views/observer-totals';
 import Rooms from './views/rooms';
 import Settings from './views/settings';
 import TabBar from './components/tab-bar';
@@ -42,6 +43,7 @@ class App extends React.PureComponent {
     socketConnected: PropTypes.bool,
     storedSettings: PropTypes.object,
     initSettings: PropTypes.func,
+    observerMode: PropTypes.bool,
   };
 
   static childContextTypes = {
@@ -111,11 +113,16 @@ class App extends React.PureComponent {
   };
 
   render() {
+    const {observerMode} = this.props;
     return (
       <Router>
         <div className="view-wrap">
           <Switch>
-            <Route exact path="/" component={Totals} />
+            <Route
+              exact
+              path="/"
+              component={observerMode ? ObserverTotals : Totals}
+            />
             <Route path="/rooms" component={Rooms} />
             <Route path="/settings" component={Settings} />
             <Redirect to="/" />
@@ -129,13 +136,21 @@ class App extends React.PureComponent {
 }
 
 const mapStateToProps = state => {
-  const {activeRoom, self, storedRoom, socketConnected, storedSettings} = state;
+  const {
+    activeRoom,
+    self,
+    storedRoom,
+    socketConnected,
+    storedSettings,
+    settings: {observerMode},
+  } = state;
   return {
     activeRoom,
     self,
     storedRoom,
     socketConnected,
     storedSettings,
+    observerMode,
   };
 };
 
