@@ -32,7 +32,7 @@ const toast = (state = null, action) => {
   if (type === WS_ERROR && supportedWsErrors.includes(action.error)) {
     return {
       toastType: 'error',
-      message: errorMessageForCode(action.code),
+      message: errorMessageForCode(action.error),
     };
   }
 
