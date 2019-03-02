@@ -16,10 +16,17 @@ class Rooms extends React.PureComponent {
     attemptedRoom: PropTypes.string,
     rooms: PropTypes.array,
     socketConnected: PropTypes.bool,
+    spectatorMode: PropTypes.bool,
   };
 
   render() {
-    const {activeRoom, attemptedRoom, rooms, socketConnected} = this.props;
+    const {
+      activeRoom,
+      attemptedRoom,
+      rooms,
+      socketConnected,
+      spectatorMode,
+    } = this.props;
 
     if (!rooms || !socketConnected) return <FullPageLoader />;
 
@@ -42,9 +49,11 @@ class Rooms extends React.PureComponent {
             return (
               <div className="header__title-wrap">
                 <h2 className="header__title">Rooms</h2>
-                <Link to="/rooms/join" replace className="button">
-                  Create
-                </Link>
+                {!spectatorMode && (
+                  <Link to="/rooms/join" replace className="button">
+                    Create
+                  </Link>
+                )}
               </div>
             );
           }}
@@ -63,12 +72,19 @@ class Rooms extends React.PureComponent {
 }
 
 const mapStateToProps = state => {
-  const {rooms, activeRoom, attemptedRoom, socketConnected} = state;
+  const {
+    rooms,
+    activeRoom,
+    attemptedRoom,
+    socketConnected,
+    settings: {spectatorMode},
+  } = state;
   return {
     rooms,
     activeRoom,
     attemptedRoom,
     socketConnected,
+    spectatorMode,
   };
 };
 
