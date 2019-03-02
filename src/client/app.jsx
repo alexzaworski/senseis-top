@@ -19,7 +19,7 @@ import {
 } from '../shared/action-types';
 
 import Totals from './views/totals';
-import ObserverTotals from './views/observer-totals';
+import SpectatorTotals from './views/spectator-totals';
 import Rooms from './views/rooms';
 import Settings from './views/settings';
 import TabBar from './components/tab-bar';
@@ -43,7 +43,7 @@ class App extends React.PureComponent {
     socketConnected: PropTypes.bool,
     storedSettings: PropTypes.object,
     initSettings: PropTypes.func,
-    observerMode: PropTypes.bool,
+    spectatorMode: PropTypes.bool,
   };
 
   static childContextTypes = {
@@ -78,7 +78,7 @@ class App extends React.PureComponent {
       connectionLost,
       connectionOpened,
       socketConnected,
-      storedSettings: {observerMode},
+      storedSettings: {spectatorMode},
     } = this.props;
     const socket = new WebSocket(wsHost);
     socket.onmessage = m => this.handleMessage(JSON.parse(m.data));
@@ -102,7 +102,7 @@ class App extends React.PureComponent {
           type: JOIN_ROOM_REQUEST,
           ...roomToJoin,
           ...self,
-          observerMode,
+          spectatorMode,
         });
       }
     };
@@ -113,7 +113,7 @@ class App extends React.PureComponent {
   };
 
   render() {
-    const {observerMode} = this.props;
+    const {spectatorMode} = this.props;
     return (
       <Router>
         <div className="view-wrap">
@@ -121,7 +121,7 @@ class App extends React.PureComponent {
             <Route
               exact
               path="/"
-              component={observerMode ? ObserverTotals : Totals}
+              component={spectatorMode ? SpectatorTotals : Totals}
             />
             <Route path="/rooms" component={Rooms} />
             <Route path="/settings" component={Settings} />
@@ -142,7 +142,7 @@ const mapStateToProps = state => {
     storedRoom,
     socketConnected,
     storedSettings,
-    settings: {observerMode},
+    settings: {spectatorMode},
   } = state;
   return {
     activeRoom,
@@ -150,7 +150,7 @@ const mapStateToProps = state => {
     storedRoom,
     socketConnected,
     storedSettings,
-    observerMode,
+    spectatorMode,
   };
 };
 

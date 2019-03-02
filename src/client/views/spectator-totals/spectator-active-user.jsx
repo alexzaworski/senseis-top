@@ -1,7 +1,7 @@
 const React = require('react');
 const PropTypes = require('prop-types');
 
-class ObserverActiveUser extends React.PureComponent {
+class SpectatorActiveUser extends React.PureComponent {
   state = {
     cachedUser: this.props.user,
   };
@@ -31,12 +31,12 @@ class ObserverActiveUser extends React.PureComponent {
     const {userId, life} = user;
 
     return (
-      <div key={userId} className="observer-totals__user" onClick={waitGoBack}>
-        <div className="observer-totals__user-id">{userId}</div>
-        <div className="observer-totals__user-life">{life}</div>
+      <div key={userId} className="spectator-totals__user" onClick={waitGoBack}>
+        <div className="spectator-totals__user-id">{userId}</div>
+        <div className="spectator-totals__user-life">{life}</div>
       </div>
     );
   }
 }
 
-export default ObserverActiveUser;
+export default SpectatorActiveUser;

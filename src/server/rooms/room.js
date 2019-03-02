@@ -16,7 +16,7 @@ class Room {
   constructor({roomId, password, creator, onEmpty}) {
     if (String(roomId).length === 0) throw MISSING_ROOM_ID;
     this._users = [];
-    this._observers = [];
+    this._spectators = [];
     this._timeouts = {};
     this.roomId = roomId;
     this.password = password;
@@ -37,11 +37,11 @@ class Room {
     clearTimeout(this._timeouts[userId]);
   };
 
-  addUser({userId, life, ws, observerMode, removeUser}) {
+  addUser({userId, life, ws, spectatorMode, removeUser}) {
     if (String(userId).length === 0) throw MISSING_USER_ID;
     if (this.allMembers().some(u => u.userId === userId)) throw USER_EXISTS;
 
-    if (observerMode) return this.handlerObserver({userId, ws, removeUser});
+    if (spectatorMode) return this.handlerSpectator({userId, ws, removeUser});
 
     if (isNaN(life)) throw INVALID_LIFE;
     if (this.userCount() === MAX_ROOM_SIZE) throw ROOM_FULL;
@@ -53,25 +53,25 @@ class Room {
   }
 
   _logAdded() {
-    const {_users, _observers} = this;
+    const {_users, _spectators} = this;
     const {length: uCount} = _users;
-    const {length: oCount} = _observers;
+    const {length: oCount} = _spectators;
     console.info(
       `Added member to "${this.roomId}" (users: ${uCount} | obs: ${oCount})`
     );
   }
 
   _logRemoved() {
-    const {_users, _observers} = this;
+    const {_users, _spectators} = this;
     const {length: uCount} = _users;
-    const {length: oCount} = _observers;
+    const {length: oCount} = _spectators;
     console.info(
       `Removed member from "${this.roomId}" (users: ${uCount} | obs: ${oCount})`
     );
   }
 
-  handlerObserver(newObserver) {
-    this._observers = [...this._observers, newObserver];
+  handlerSpectator(newSpectator) {
+    this._spectators = [...this._spectators, newSpectator];
     this._logAdded();
   }
 
@@ -93,20 +93,20 @@ class Room {
   }
 
   allMembers() {
-    return [...this._users, ...this._observers];
+    return [...this._users, ...this._spectators];
   }
 
   allMembersExcept(userId) {
-    return [...this._users, ...this._observers].filter(isNotUser(userId));
+    return [...this._users, ...this._spectators].filter(isNotUser(userId));
   }
 
   removeUser(userId) {
     this._users = this._users.filter(isNotUser(userId));
-    this._observers = this._observers.filter(isNotUser(userId));
+    this._spectators = this._spectators.filter(isNotUser(userId));
     this._clearIdleTimeout(userId);
     this._logRemoved();
     if (this._users.length === 0) {
-      this._observers.forEach(obs => obs.removeUser());
+      this._spectators.forEach(obs => obs.removeUser());
       this.onEmpty();
     }
   }

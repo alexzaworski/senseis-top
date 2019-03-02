@@ -2,9 +2,9 @@ import {connect} from 'react-redux';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import ObserverActiveUser from './observer-active-user';
+import SpectatorActiveUser from './spectator-active-user';
 
-class ObserverTotals extends React.PureComponent {
+class SpectatorTotals extends React.PureComponent {
   state = {
     activeUser: null,
   };
@@ -25,7 +25,7 @@ class ObserverTotals extends React.PureComponent {
       const foundUser = users.find(u => u.userId === activeUser);
       return (
         <div className="view-main view-main--flex">
-          <ObserverActiveUser
+          <SpectatorActiveUser
             waitGoBack={() => this.setActiveUser(null)}
             user={foundUser}
           />
@@ -35,17 +35,17 @@ class ObserverTotals extends React.PureComponent {
 
     return (
       <div className="view-main">
-        <div className="observer-totals">
+        <div className="spectator-totals">
           {users.map(user => {
             const {userId, life} = user;
             return (
               <div
                 key={userId}
-                className="observer-totals__user"
+                className="spectator-totals__user"
                 onClick={() => this.setActiveUser(userId)}
               >
-                <div className="observer-totals__user-id">{userId}</div>
-                <div className="observer-totals__user-life">{life}</div>
+                <div className="spectator-totals__user-id">{userId}</div>
+                <div className="spectator-totals__user-life">{life}</div>
               </div>
             );
           })}
@@ -55,7 +55,7 @@ class ObserverTotals extends React.PureComponent {
   }
 }
 
-ObserverTotals.propTypes = {};
+SpectatorTotals.propTypes = {};
 
 const mapStateToProps = state => {
   const {otherUsers} = state;
@@ -64,4 +64,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(ObserverTotals);
+export default connect(mapStateToProps)(SpectatorTotals);

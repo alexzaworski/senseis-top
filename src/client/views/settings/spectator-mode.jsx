@@ -5,30 +5,30 @@ import {connect} from 'react-redux';
 import Toggle from '../../components/toggle';
 import {UPDATE_SETTINGS} from '../../../shared/action-types';
 
-class ObserverMode extends React.PureComponent {
+class SpectatorMode extends React.PureComponent {
   static propTypes = {
-    observerMode: PropTypes.bool,
-    saveObserverMode: PropTypes.func,
+    spectatorMode: PropTypes.bool,
+    saveSpectatorMode: PropTypes.func,
   };
 
   state = {
-    observerMode: this.props.observerMode,
+    spectatorMode: this.props.spectatorMode,
     hasSaved: false,
   };
 
   handleChange = event => {
-    const {saveObserverMode} = this.props;
-    saveObserverMode(event.target.checked);
+    const {saveSpectatorMode} = this.props;
+    saveSpectatorMode(event.target.checked);
   };
 
   render() {
-    const {observerMode} = this.props;
+    const {spectatorMode} = this.props;
     return (
       <Fragment>
-        <h3 className="subheader">Observer Mode</h3>
+        <h3 className="subheader">Spectator Mode</h3>
         <p>
-          Observer mode allows you to join rooms as a passive user and prevents
-          you from creating rooms of your own. While in observer mode you will
+          Spectator mode allows you to join rooms as a passive user and prevents
+          you from creating rooms of your own. While in spectator mode you will
           not get disconnected for inactivity.
         </p>
         <p>
@@ -39,8 +39,8 @@ class ObserverMode extends React.PureComponent {
           Heads up: this is still pretty experimental, use at your own risk
         </p>
         <Toggle
-          label="Enable observer mode"
-          inputProps={{checked: observerMode, onChange: this.handleChange}}
+          label="Enable spectator mode"
+          inputProps={{checked: spectatorMode, onChange: this.handleChange}}
         />
       </Fragment>
     );
@@ -49,19 +49,19 @@ class ObserverMode extends React.PureComponent {
 
 const mapStateToProps = state => {
   const {
-    settings: {observerMode},
+    settings: {spectatorMode},
   } = state;
   return {
-    observerMode,
+    spectatorMode,
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    saveObserverMode: observerMode => {
+    saveSpectatorMode: spectatorMode => {
       dispatch({
         type: UPDATE_SETTINGS,
-        settings: {observerMode},
+        settings: {spectatorMode},
       });
     },
   };
@@ -70,4 +70,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(ObserverMode);
+)(SpectatorMode);

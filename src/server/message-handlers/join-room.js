@@ -7,18 +7,18 @@ import exitRoom from './shared/exit-room';
 import leaveRoomHandler from './leave-room';
 
 const joinRoomHandler = ({ws, data}) => {
-  const {password, roomId, userId, life, observerMode} = data;
+  const {password, roomId, userId, life, spectatorMode} = data;
 
-  // we're getting the room in strict mode when connecting as an
-  // observer because observers can never be the only person in a
+  // we're getting the room in strict mode when connecting as a
+  // spectator because spectators can never be the only person in a
   // room (which means they cannot be first)
-  const room = getRoom({password, roomId, userId, strict: observerMode});
+  const room = getRoom({password, roomId, userId, strict: spectatorMode});
 
   const userPayload = {
     userId,
     life,
     ws,
-    observerMode,
+    spectatorMode,
     removeUser: () => leaveRoomHandler({ws, data}),
   };
 

@@ -6,7 +6,7 @@ import RouteHeader from '../../components/route-header';
 import SettingsList from './settings-list';
 import DefaultLife from './default-life';
 import Help from './help';
-import ObserverMode from './observer-mode';
+import SpectatorMode from './spectator-mode';
 
 class Settings extends React.PureComponent {
   render() {
@@ -23,9 +23,9 @@ class Settings extends React.PureComponent {
             />
             <Route path="/settings/help" exact component={Help} />
             <Route
-              path="/settings/observer-mode"
+              path="/settings/spectator-mode"
               exact
-              component={ObserverMode}
+              component={SpectatorMode}
             />
             <Redirect to="/settings" />
           </Switch>

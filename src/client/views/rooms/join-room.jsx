@@ -26,7 +26,7 @@ class CreateRoom extends React.PureComponent {
     userId: PropTypes.string,
     currentError: PropTypes.string,
     hidePasswordInput: PropTypes.bool,
-    observerMode: PropTypes.bool,
+    spectatorMode: PropTypes.bool,
   };
 
   state = {
@@ -66,11 +66,11 @@ class CreateRoom extends React.PureComponent {
   handleSubmit = event => {
     event.preventDefault();
     const {formData} = this.state;
-    const {life, observerMode} = this.props;
+    const {life, spectatorMode} = this.props;
     this.context.wsSend({
       type: JOIN_ROOM_REQUEST,
       life,
-      observerMode,
+      spectatorMode,
       ...formData,
     });
   };
@@ -81,11 +81,11 @@ class CreateRoom extends React.PureComponent {
   };
 
   render() {
-    const {observerMode} = this.props;
+    const {spectatorMode} = this.props;
     const {formData, attemptedRoom, hidePasswordInput} = this.state;
     const {userId, roomId, password} = formData;
 
-    if (observerMode && !attemptedRoom) {
+    if (spectatorMode && !attemptedRoom) {
       return <Redirect to="/rooms" />;
     }
 
@@ -94,9 +94,9 @@ class CreateRoom extends React.PureComponent {
         <h3 className="subheader">
           {attemptedRoom ? `Joining "${attemptedRoom}"` : 'Create room'}
         </h3>
-        {observerMode && (
+        {spectatorMode && (
           <p className="notice">
-            You are joining as an observer. If all other players exit the room
+            You are joining as a spectator. If all other players exit the room
             you will be disconnected. Go to <Link to="/settings">settings</Link>{' '}
             to change this behavior.
           </p>
@@ -159,7 +159,7 @@ const mapStateToProps = state => {
     attemptedRoom,
     self: {life, userId},
     errors: {joinRoom: currentError},
-    settings: {observerMode},
+    settings: {spectatorMode},
     rooms,
   } = state;
 
@@ -177,7 +177,7 @@ const mapStateToProps = state => {
     life,
     userId,
     currentError,
-    observerMode,
+    spectatorMode,
   };
 };
 
