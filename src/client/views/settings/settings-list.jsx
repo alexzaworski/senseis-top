@@ -10,7 +10,11 @@ class SettingsList extends React.PureComponent {
 
   render() {
     const {
-      settings: {defaultLife, spectatorMode},
+      settings: {
+        defaultLife,
+        spectatorMode,
+        experimentalFeatures, // has to be enabled manually
+      },
     } = this.props;
 
     return (
@@ -34,18 +38,20 @@ class SettingsList extends React.PureComponent {
             <div className="underlined-list__secondary">{defaultLife}</div>
           </Link>
         </li>
-        <li className="underlined-list__item">
-          <Link
-            to="/settings/spectator-mode"
-            replace
-            className="underlined-list__item-wrap util-inherit-color"
-          >
-            <div className="underlined-list__primary">Spectator Mode</div>
-            <div className="underlined-list__secondary">
-              {spectatorMode ? 'ON' : 'OFF'}
-            </div>
-          </Link>
-        </li>
+        {experimentalFeatures && (
+          <li className="underlined-list__item">
+            <Link
+              to="/settings/spectator-mode"
+              replace
+              className="underlined-list__item-wrap util-inherit-color"
+            >
+              <div className="underlined-list__primary">Spectator Mode</div>
+              <div className="underlined-list__secondary">
+                {spectatorMode ? 'ON' : 'OFF'}
+              </div>
+            </Link>
+          </li>
+        )}
       </ul>
     );
   }
