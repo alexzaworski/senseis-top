@@ -78,7 +78,7 @@ class App extends React.PureComponent {
       connectionLost,
       connectionOpened,
       socketConnected,
-      storedSettings: {spectatorMode},
+      spectatorMode,
     } = this.props;
     const socket = new WebSocket(wsHost);
     socket.onmessage = m => this.handleMessage(JSON.parse(m.data));
