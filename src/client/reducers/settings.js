@@ -3,7 +3,6 @@ import {UPDATE_SETTINGS} from '../../shared/action-types';
 const defaultSettings = {
   defaultLife: 20,
   spectatorMode: false,
-  experimentalFeatures: false,
 };
 
 const mergeAndValidateSettings = settingsToMerge => {

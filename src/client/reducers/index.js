@@ -12,6 +12,7 @@ import toast from './toast';
 import socketConnected from './socket-connected';
 import settings from './settings';
 import userSortOrder from './user-sort-order';
+import enableExperiments from './enable-experiments';
 
 const noop = state => state || null;
 
@@ -27,6 +28,7 @@ const reducers = combineReducers({
   userSortOrder,
   storedRoom: noop,
   storedSettings: noop,
+  enableExperiments,
   errors: combineReducers({
     joinRoom: createErrorReducer({
       cause: JOIN_ROOM_REQUEST,

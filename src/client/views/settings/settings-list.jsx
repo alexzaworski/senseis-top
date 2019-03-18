@@ -6,15 +6,13 @@ import {Link} from 'react-router-dom';
 class SettingsList extends React.PureComponent {
   static propTypes = {
     settings: PropTypes.object,
+    enableExperiments: PropTypes.bool,
   };
 
   render() {
     const {
-      settings: {
-        defaultLife,
-        spectatorMode,
-        experimentalFeatures, // has to be enabled manually
-      },
+      settings: {defaultLife, spectatorMode},
+      enableExperiments,
     } = this.props;
 
     return (
@@ -38,7 +36,7 @@ class SettingsList extends React.PureComponent {
             <div className="underlined-list__secondary">{defaultLife}</div>
           </Link>
         </li>
-        {experimentalFeatures && (
+        {enableExperiments && (
           <li className="underlined-list__item">
             <Link
               to="/settings/spectator-mode"
@@ -58,9 +56,10 @@ class SettingsList extends React.PureComponent {
 }
 
 const mapStateToProps = state => {
-  const {settings} = state;
+  const {settings, enableExperiments} = state;
   return {
     settings,
+    enableExperiments,
   };
 };
 

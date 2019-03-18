@@ -16,6 +16,7 @@ import {
   CONNECTION_OPENED,
   CONNECTION_LOST,
   UPDATE_SETTINGS,
+  ENABLE_EXPERIMENTS,
 } from '../shared/action-types';
 
 import Totals from './views/totals';
@@ -44,6 +45,7 @@ class App extends React.PureComponent {
     storedSettings: PropTypes.object,
     initSettings: PropTypes.func,
     spectatorMode: PropTypes.bool,
+    enableExperiments: PropTypes.func,
   };
 
   static childContextTypes = {
@@ -55,7 +57,16 @@ class App extends React.PureComponent {
     document.addEventListener('touchend', () => noSleep.enable(), {once: true});
     const {storedSettings, initSettings} = this.props;
     storedSettings && initSettings(storedSettings);
+    this.checkExperimentalFeatures();
     this.connect();
+  }
+
+  checkExperimentalFeatures() {
+    const {enableExperiments} = this.props;
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('experiments') === 'true') {
+      enableExperiments();
+    }
   }
 
   getChildContext() {
@@ -167,6 +178,9 @@ const mapDispatchToProps = dispatch => {
     },
     initSettings: storedSettings => {
       dispatch({type: UPDATE_SETTINGS, settings: storedSettings});
+    },
+    enableExperiments: () => {
+      dispatch({type: ENABLE_EXPERIMENTS});
     },
   };
 };
