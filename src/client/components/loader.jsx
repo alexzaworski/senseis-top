@@ -16,4 +16,4 @@ const Loader = () => {
   );
 };
 
-module.exports = Loader;
+export default Loader;

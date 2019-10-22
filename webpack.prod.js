@@ -14,9 +14,6 @@ module.exports = merge(common, {
         use: extractScss.extract([
           {
             loader: 'css-loader',
-            options: {
-              minimize: true,
-            },
           },
           'postcss-loader',
           'sass-loader',

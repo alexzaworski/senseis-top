@@ -15,4 +15,4 @@ const createErrorReducer = ({cause, clearedBy}) => {
   };
 };
 
-module.exports = createErrorReducer;
+export default createErrorReducer;

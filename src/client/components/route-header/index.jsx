@@ -61,4 +61,4 @@ class RouteHeader extends React.Component {
   }
 }
 
-module.exports = RouteHeader;
+export default RouteHeader;

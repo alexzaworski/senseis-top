@@ -26,4 +26,4 @@ const settings = (state = defaultSettings, action) => {
   }
 };
 
-module.exports = settings;
+export default settings;

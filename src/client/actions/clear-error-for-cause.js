@@ -7,4 +7,4 @@ const clearErrorForCause = cause => {
   };
 };
 
-module.exports = clearErrorForCause;
+export default clearErrorForCause;

@@ -20,4 +20,4 @@ const activeRoom = (state = null, action) => {
   }
 };
 
-module.exports = activeRoom;
+export default activeRoom;
