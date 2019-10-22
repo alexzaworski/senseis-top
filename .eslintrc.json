@@ -17,6 +17,7 @@
     "semi": ["error", "always"],
     "comma-dangle": [1, "always-multiline"],
     "no-console": ["error", {"allow": ["error", "info"]}],
+    "no-prototype-builtins": "off",
     "import/order": ["error", {
       "newlines-between": "always",
       "groups": [

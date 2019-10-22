@@ -42,4 +42,4 @@ const toast = (state = null, action) => {
   return {toastType, message: messageForAction(action)};
 };
 
-module.exports = toast;
+export default toast;

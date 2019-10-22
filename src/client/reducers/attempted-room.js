@@ -16,4 +16,4 @@ const attemptedRoom = (state = null, action) => {
   }
 };
 
-module.exports = attemptedRoom;
+export default attemptedRoom;

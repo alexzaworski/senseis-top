@@ -8,4 +8,4 @@ const errorMessages = {
 
 const messageForCode = code => errorMessages[code];
 
-module.exports = messageForCode;
+export default messageForCode;
